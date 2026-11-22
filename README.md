@@ -64,16 +64,26 @@ stateDiagram-v2
 
 ```text
 real-estate-rfm-segmentation/
-├── index.html                    # Διαδραστικό Web App (Simulator + Local CSV Analyzer & Exporter)
+├── index.html                               # Διαδραστική Web Suite (6 Tabs — GitHub Pages)
 ├── data/
-│   ├── sample_crm_leads.csv      # 150 συνθετικοί (εικονικοί) πελάτες CRM
-│   └── sample_interactions.csv   # 753 inbound/outbound επικοινωνίες για SQL εξάσκηση
+│   ├── sample_crm_leads.csv                 # 150 συνθετικοί (εικονικοί) πελάτες CRM
+│   └── sample_interactions.csv              # 753 inbound/outbound επικοινωνίες για SQL εξάσκηση
 ├── sql/
-│   └── rfm_segmentation.sql      # Η πλήρης λογική σε SQL (WHERE direction = 'inbound' + CASE WHEN)
-└── python/
-    ├── segment_leads.py          # Python script για KPIs & export λιστών ανά segment (UTF-8 BOM)
-    └── generate_sample_data.py   # Generator του συνθετικού dataset
+│   └── rfm_segmentation.sql                 # Η πλήρης λογική σε SQL (WHERE direction = 'inbound' + CASE WHEN)
+├── python/
+│   ├── segment_leads.py                     # Python script για KPIs & export λιστών ανά segment (UTF-8 BOM)
+│   └── generate_sample_data.py              # Generator του συνθετικού dataset
+└── notebooks/
+    └── rfm_analysis_walkthrough.ipynb       # Εκπαιδευτικό Jupyter Notebook (pandas + attribution)
 ```
+
+### Τι περιλαμβάνει η Live Web Suite (`index.html`)
+1. **Κανόνες & RFM Λογική:** Οι 5 κάρτες με κανόνες μετάβασης (`↑` / `↓`).
+2. **Segment Simulator:** Live δοκιμή σεναρίων πελάτη με sliders & presets.
+3. **CRM CSV Analyzer & Attribution:** Τοπική ανάλυση CSV (υποστηρίζει `,` και `;`), KPIs, Top Περιοχές, Απόδοση Καναλιών, Alert 45–60 ημερών, Copy Emails & Export CSV.
+4. **What-If Threshold Lab:** Πειραματισμός με τα όρια (π.χ. 45 vs 60 μέρες, 200k vs 250k budget) με live σύγκριση Πριν/Μετά.
+5. **Email Templates:** 5 έτοιμα copy–paste templates ανά segment με live προσωποποίηση (`{{Όνομα}}`, `{{Περιοχή}}`, `{{Budget}}`).
+6. **SQL / Python & Mini Quiz:** Side-by-side κώδικας με αντιγραφή + 3 ερωτήσεις εξάσκησης.
 
 ---
 
