@@ -1,113 +1,100 @@
-# 🏠 Real Estate RFM Lead Segmentation
+# 🏠 Real Estate RFM Lead Segmentation & Mini-CRM
 
-> **Data Analyst Case Study:** Πώς προσαρμόζουμε τη λογική **RFM (Recency, Frequency, Monetary)** σε έναν κλάδο *χωρίς επαναλαμβανόμενες αγορές* όπως το **Real Estate**, μετατρέποντάς την σε ένα πρακτικό σύστημα 5 segments για στοχευμένα email campaigns.
+[![Live App](https://img.shields.io/badge/Live%20App-GitHub%20Pages-16803d?style=for-the-badge)](https://karidasd.github.io/real-estate-rfm-segmentation/)
+[![Bilingual](https://img.shields.io/badge/Language-EN%20%7C%20EL-1d4ed8?style=for-the-badge)](#)
+[![GDPR Safe](https://img.shields.io/badge/Privacy-100%25%20Client--Side-475569?style=for-the-badge)](#)
 
-🌐 **Live Web App (GitHub Pages):** https://karidasd.github.io/real-estate-rfm-segmentation/  
+> **Adapting RFM (Recency, Frequency, Monetary) to a non-repeat industry like Real Estate** — bundled as a **100% client-side, installable PWA Mini-CRM** (English & Greek), complete with **SQL**, **Python**, and a **Jupyter Notebook**.
+
+🌐 **Live Web App:** https://karidasd.github.io/real-estate-rfm-segmentation/  
 📦 **Repository:** https://github.com/karidasd/real-estate-rfm-segmentation
 
 ---
 
-## 💡 Η Επιχειρηματική Ιδέα
+## ✨ Key Application Features (100% Local / Zero Backend / GDPR-Safe)
 
-Στο κλασικό e-commerce το RFM βασίζεται σε συχνές αγορές. Στα ακίνητα, όμως, ένας πελάτης αγοράζει σπάνια. Η λύση είναι να αντικαταστήσουμε τις αγορές με **σήματα πρόθεσης αγοράς (intent signals)**:
-
-| Διάσταση RFM | Κλασικό E-commerce | Προσαρμογή στο Real Estate |
-| :--- | :--- | :--- |
-| **R — Recency** | Ημέρες από την τελευταία αγορά | Ημέρες από την τελευταία **εισερχόμενη** κίνηση πελάτη *(αγνοούμε τα δικά μας follow-ups!)* |
-| **F — Frequency** | Πλήθος παραγγελιών | Αριθμός σημάτων/αιτημάτων (`2–3`, `4+`) & **επίσκεψη σε ακίνητο** |
-| **M — Monetary** | Συνολική δαπάνη | Δηλωμένο **budget** (από `200.000€+` λειτουργεί ως επιταχυντής) |
-
-> **Κρίσιμη λεπτομέρεια Data Engineering:** Μετράμε **μόνο** τις επικοινωνίες που ξεκινάει ο πελάτης (`direction = 'inbound'`), ώστε τα δικά μας follow-ups ή newsletters να μην «αλλοιώνουν» το Recency και κρατούν τεχνητά ζεστούς ανενεργούς πελάτες.
+1. **🎯 Daily Action Queue (`Today`):** Automatic **Priority Score (0–99)** surfacing overdue/today follow-ups, **45–60 day decay alerts**, VIP ready buyers, and leads one step away from upgrading — with 1-click **Email (`mailto:`)**, **WhatsApp**, and **Done** tracking (`localStorage`).
+2. **📊 CRM Database, Kanban Pipeline Board & Tags:** Toggle between **Table** and **Kanban Board** views, tag leads (`VIP`, `Cash`, `Mortgage`, `Investor`, `Urgent Buyer`), log new inbound signals or property visits (auto-recomputing segments live), and export Excel-ready CSVs (UTF-8 BOM).
+3. **🔗 Smart CSV Column Mapper:** Upload exports from *any* CRM (supports `,` and `;` delimiters, auto-calculates recency days from last-contact dates).
+4. **🏠 Property-to-Buyer Matcher:** Enter a new listing's area and price (±10%/15%/25% tolerance) to instantly find matching buyers ranked from **Ready Buyers** down to **Considering**, with 1-click Email/WhatsApp & CSV export.
+5. **💰 Agency Commission Forecast & What-If Threshold Lab:** Convert pipeline budget into **expected brokerage commissions (€)**, quantify **commissions at risk** from 45–60 day alerts, and run live sensitivity analysis on RFM thresholds (60d / €200k / 4+ signals).
+6. **📅 Calendar Reminders (`.ics`), Dark Mode, JSON Backup/Restore, PDF Report & Bilingual UI (`EN / EL`):** Download standard `.ics` calendar invites for Google Calendar / Outlook, switch Light/Dark theme, toggle English/Greek, export an executive PDF report, or install as a **PWA**.
 
 ---
 
-## 🔄 Κύκλος Ζωής των 5 Segments (Lifecycle State Machine)
+## 💡 How Classical RFM Maps to Real Estate
+
+| RFM Dimension | Classical E-commerce | Real Estate Adaptation |
+| :--- | :--- | :--- |
+| **R — Recency** | Days since last purchase | Days since last **inbound** client action *(ignoring outbound follow-ups!)* |
+| **F — Frequency** | Number of orders | Count of inbound signals/inquiries (`2–3`, `4+`) & **property visits** |
+| **M — Monetary** | Total spend | Stated **budget** (`≥ €200,000` acts as an accelerator for Ready Buyers) |
+
+> **Key Data Engineering Detail:** Only client-initiated interactions (`WHERE direction = 'inbound'`) reset Recency — preventing agency newsletters or follow-up calls from artificially keeping inactive leads "warm".
+
+---
+
+## 🔄 5-Segment Lifecycle State Machine
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Νέος_ενδιαφερόμενος: Εισερχόμενη κίνηση (≤ 60 μέρες)
-    [*] --> Έτοιμος_αγοραστής: Επίσκεψη ή 4+ σήματα ή 2–3 σήματα & budget ≥ 200k
+    [*] --> New_Lead: Inbound activity (≤ 60 days)
+    [*] --> Ready_Buyer: Visit OR 4+ signals OR 2–3 signals & budget ≥ €200k
 
-    Νέος_ενδιαφερόμενος --> Έτοιμος_αγοραστής: Επίσκεψη / 4+ σήματα / 2–3 σήματα & ≥200k
-    Νέος_ενδιαφερόμενος --> Σε_σκέψη: > 60 μέρες χωρίς κίνηση
-    Έτοιμος_αγοραστής --> Σε_σκέψη: > 60 μέρες χωρίς κίνηση
+    New_Lead --> Ready_Buyer: Visit / 4+ signals / 2–3 signals & ≥ €200k
+    New_Lead --> Considering: > 60 days inactive
+    Ready_Buyer --> Considering: > 60 days inactive
 
-    Σε_σκέψη --> Σε_ψύξη: > 180 μέρες χωρίς κίνηση
-    Σε_σκέψη --> Νέος_ενδιαφερόμενος: Νέα κίνηση
-    Σε_σκέψη --> Έτοιμος_αγοραστής: Νέα ισχυρή κίνηση
+    Considering --> Cold: > 180 days inactive
+    Considering --> New_Lead: New inbound activity
+    Considering --> Ready_Buyer: Strong new inbound activity
 
-    Σε_ψύξη --> Σε_νάρκη: > 365 μέρες χωρίς κίνηση
-    Σε_ψύξη --> Νέος_ενδιαφερόμενος: Νέα κίνηση
-    Σε_ψύξη --> Έτοιμος_αγοραστής: Νέα ισχυρή κίνηση
+    Cold --> Dormant: > 365 days inactive
+    Cold --> New_Lead: New inbound activity
+    Cold --> Ready_Buyer: Strong new inbound activity
 
-    Σε_νάρκη --> Νέος_ενδιαφερόμενος: Νέα κίνηση
-    Σε_νάρκη --> Έτοιμος_αγοραστής: Νέα ισχυρή κίνηση
+    Dormant --> New_Lead: New inbound activity
+    Dormant --> Ready_Buyer: Strong new inbound activity
 ```
 
 ---
 
-## ✉️ Email Campaign Playbook & KPIs
-
-| Segment | Χρονικό Παράθυρο | Προτεινόμενη Ενέργεια / Email | Κύριο KPI |
-| :--- | :--- | :--- | :--- |
-| 🔥 **Έτοιμος αγοραστής** | έως 60 μέρες | Προσωπική επαφή, 2–3 στοχευμένα ακίνητα στο budget, πρόταση για υπόδειξη | Visit-to-Offer & Conversion Rate |
-| 🌱 **Νέος ενδιαφερόμενος** | έως 60 μέρες | Welcome email, συλλογή κριτηρίων (περιοχή/budget), επιλεγμένες προτάσεις | Qualification Rate (άνοδος σε «Έτοιμο») |
-| ⌛ **Σε σκέψη** | 61–180 μέρες | Nurturing: νέα ακίνητα στην περιοχή, ενημερώσεις τιμών / price drops | Click-Through & Reactivation Rate |
-| ❄️ **Σε ψύξη** | 181–365 μέρες | Re-engagement («Ψάχνετε ακόμα στην περιοχή Χ;») με 1-click επιλογές | Reactivation Rate |
-| 🌙 **Σε νάρκη** | 365+ μέρες | Τριμηνιαίο market report ή καθαρισμός λίστας (list hygiene) | Unsubscribe / Deliverability Health |
-
-> 💡 **Bonus Προσθήκη — Alert 45–60 ημερών:** Εντοπίζει αυτόματα τους «Έτοιμους αγοραστές» που πλησιάζουν τις 60 μέρες αδράνειας, ώστε η ομάδα να κάνει στοχευμένο follow-up *πριν* υποβαθμιστούν σε «Σε σκέψη».
-
----
-
-## 📂 Δομή του Repository
+## 📂 Repository Structure
 
 ```text
 real-estate-rfm-segmentation/
-├── index.html                               # Διαδραστική Web Suite (6 Tabs — GitHub Pages)
+├── index.html                               # Full Bilingual (EN/EL) Mini-CRM PWA (GitHub Pages)
+├── manifest.json & icon.svg                 # PWA installable app manifest & icon
 ├── data/
-│   ├── sample_crm_leads.csv                 # 150 συνθετικοί (εικονικοί) πελάτες CRM
-│   └── sample_interactions.csv              # 753 inbound/outbound επικοινωνίες για SQL εξάσκηση
+│   ├── sample_crm_leads.csv                 # 150 synthetic CRM leads
+│   └── sample_interactions.csv              # 753 inbound/outbound interactions for SQL practice
 ├── sql/
-│   └── rfm_segmentation.sql                 # Η πλήρης λογική σε SQL (WHERE direction = 'inbound' + CASE WHEN)
+│   └── rfm_segmentation.sql                 # Full segmentation logic in SQL (CTEs + CASE WHEN)
 ├── python/
-│   ├── segment_leads.py                     # Python script για KPIs & export λιστών ανά segment (UTF-8 BOM)
-│   └── generate_sample_data.py              # Generator του συνθετικού dataset
+│   ├── segment_leads.py                     # Zero-dependency Python script for KPIs & CSV exports
+│   └── generate_sample_data.py              # Synthetic dataset generator
 └── notebooks/
-    └── rfm_analysis_walkthrough.ipynb       # Εκπαιδευτικό Jupyter Notebook (pandas + attribution)
+    └── rfm_analysis_walkthrough.ipynb       # Educational Jupyter Notebook (pandas + attribution)
 ```
-
-### Τι περιλαμβάνει η Live Web Εφαρμογή (`index.html` — 100% Client-Side Mini-CRM)
-1. **🎯 Σήμερα (Daily Action Queue):** Αυτόματη λίστα προτεραιότητας με Priority Score (πρώτα Alerts 45–60μ, μετά VIP Έτοιμοι & Νέοι κοντά σε αναβάθμιση), 1-κλικ **Email (`mailto:`)**, **WhatsApp**, και checkbox **«Επικοινώνησα»** (αποθηκευμένα τοπικά στο `localStorage`).
-2. **📊 Βάση Πελατών, Smart CSV Mapper & Καρτέλα Πελάτη:**
-   * **Smart CSV Column Mapper:** Ανέβασε CSV από *οποιοδήποτε* CRM (με `,` ή `;`) και αντιστοίχισε τις στήλες σου — υπολογίζει αυτόματα τις μέρες από ημερομηνία τελευταίας επαφής!
-   * **Καρτέλα Πελάτη & «➕ Νέος Πελάτης»:** Προσθήκη σημειώσεων, 1-κλικ καταγραφή εισερχόμενου σήματος ή επίσκεψης (που αναβαθμίζει αυτόματα το segment!).
-   * **Analytics & Export:** Top Περιοχές, Απόδοση Καναλιών, Copy Emails & Export CSV (UTF-8 BOM για Excel).
-3. **🏠 Matcher Νέου Ακινήτου:** Βάζεις περιοχή & τιμή νέου ακινήτου → βρίσκει αμέσως τους ταιριαστούς αγοραστές (±10%/15%/25% budget), ταξινομημένους από Έτοιμους προς Σε σκέψη, με 1-κλικ Email/WhatsApp & Export.
-4. **✉️ Email Templates:** 5 έτοιμα copy–paste ελληνικά templates με live προσωποποίηση.
-5. **🧪 What-If Threshold Lab:** Πειραματισμός με τα όρια (60μ / 200k / 4+) με live σύγκριση Πριν/Μετά.
-6. **🖨️ Αναφορά Διοίκησης (PDF):** 1-κλικ εκτυπώσιμη εβδομαδιαία αναφορά KPIs & Alerts.
 
 ---
 
-## 🚀 Πώς να το χρησιμοποιήσεις
+## 🚀 Quick Start
 
-### 1. Live Web Εργαλείο (GitHub Pages)
-* Άνοιξε το `index.html` απευθείας στον browser σου ή ενεργοποίησε το **GitHub Pages** (`Settings → Pages → Branch: main / root`).
-* Δοκίμασε το **Segment Simulator** ή ανέβασε το δικό σου CSV στο **CRM CSV Analyzer** (100% τοπική επεξεργασία στον browser — κανένα δεδομένο δεν αποστέλλεται σε server).
-
-### 2. Εκτέλεση του Python Script
-Δεν απαιτεί εξωτερικές βιβλιοθήκες (τρέχει με standard Python 3):
-```bash
-python python/segment_leads.py
-```
-Δημιουργεί τον φάκελο `output/` με ξεχωριστό `.csv` για κάθε segment, έτοιμο για import σε εργαλεία email marketing.
-
-### 3. Εξάσκηση σε SQL
-Άνοιξε το [`sql/rfm_segmentation.sql`](sql/rfm_segmentation.sql) για να δεις πώς εφαρμόζεται η λογική με `WITH` (CTEs), `WHERE direction = 'inbound'`, `GROUP BY` και `CASE WHEN`.
+* **Live App:** Open https://karidasd.github.io/real-estate-rfm-segmentation/ (click `🇬🇧 EN` / `🇬🇷 EL` in the top right to switch language).
+* **Python Script (standard library only):**
+  ```bash
+  python python/segment_leads.py
+  ```
+* **SQL Practice:** Inspect [`sql/rfm_segmentation.sql`](sql/rfm_segmentation.sql) to see how `WHERE direction = 'inbound'`, `GROUP BY`, and `CASE WHEN` implement the exact same rules.
 
 ---
 
-## 🧭 Προτεινόμενα Επόμενα Βήματα (Validation)
-1. **Έλεγχος των ορίων (Thresholds):** Μετά από 2–3 μήνες καμπανιών, έλεγξε το conversion rate ανά segment για να επιβεβαιώσεις με πραγματικά δεδομένα αν οι **60 μέρες** και οι **200.000€** είναι τα ιδανικά όρια.
-2. **Διάκριση Αγοραστών vs Ενοικιαστών:** Αν το CRM περιέχει και ενοικιάσεις, φρόντισε ο κανόνας του budget (`≥ 200.000€`) να εφαρμόζεται μόνο σε πελάτες αγοράς.
+## 🇬🇷 Ελληνική Περίληψη (Greek Overview)
+
+Εκπαιδευτικό **Data Analyst Case Study** και πλήρης **Mini-CRM εφαρμογή** για το Real Estate που μεταφράζει τη λογική **RFM** σε 5 δυναμικά segments (**🔥 Έτοιμος αγοραστής**, **🌱 Νέος ενδιαφερόμενος**, **⌛ Σε σκέψη**, **❄️ Σε ψύξη**, **🌙 Σε νάρκη**) βάσει αποκλειστικά των **εισερχόμενων** επικοινωνιών του πελάτη, των επισκέψεων και του budget (`≥ 200.000€`).
+
+Περιλαμβάνει:
+* **Ημερήσια Λίστα Προτεραιότητας** με Priority Score, Alerts 45–60 ημερών, 1-κλικ Email/WhatsApp & Calendar reminders (`.ics`).
+* **Kanban Board**, **Tags**, **Smart CSV Column Mapper** (για οποιοδήποτε CRM), **Matcher Νέου Ακινήτου**, **Πρόβλεψη Προμηθειών (€)** & **What-If Lab**.
+* **SQL**, **Python** & **Jupyter Notebook** για πλήρη κατανόηση της ανάλυσης δεδομένων.

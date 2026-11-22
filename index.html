@@ -253,29 +253,30 @@
   <div class="container">
     <header>
       <div>
-        <div class="eyebrow">Real Estate RFM Mini-CRM · PWA · 100% Local &amp; GDPR-Safe</div>
-        <h1>Πελάτες, Προτεραιότητες, Kanban &amp; Προβλέψεις Εσόδων</h1>
-        <p>Ημερήσια λίστα επαφών, reminders με Calendar (`.ics`), Kanban board, Matcher νέων ακινήτων, Smart CSV Import &amp; πρόβλεψη προμηθειών.</p>
+        <div class="eyebrow" data-i18n="eyebrow">Real Estate RFM Mini-CRM · PWA · 100% Local &amp; GDPR-Safe</div>
+        <h1 data-i18n="appTitle">Πελάτες, Προτεραιότητες, Kanban &amp; Προβλέψεις Εσόδων</h1>
+        <p data-i18n="appSub">Ημερήσια λίστα επαφών, reminders με Calendar (.ics), Kanban board, Matcher νέων ακινήτων, Smart CSV Import &amp; πρόβλεψη προμηθειών.</p>
       </div>
       <div class="header-actions">
-        <button type="button" class="btn btn-primary" id="btn-open-new-lead">➕ Νέος Πελάτης</button>
-        <label class="btn" for="csv-file-input">📁 Import CSV</label>
+        <button type="button" class="btn btn-primary" id="btn-open-new-lead" data-i18n="btnNewLead">➕ Νέος Πελάτης</button>
+        <label class="btn" for="csv-file-input" data-i18n="btnImportCsv">📁 Import CSV</label>
         <input type="file" id="csv-file-input" accept=".csv" style="display:none;" />
-        <button type="button" class="btn" id="btn-backup-json" title="Κατέβασμα Backup JSON">💾 Backup</button>
-        <label class="btn" for="json-restore-input" title="Επαναφορά Backup JSON">📂 Restore</label>
+        <button type="button" class="btn" id="btn-backup-json" title="Backup JSON">💾 Backup</button>
+        <label class="btn" for="json-restore-input" title="Restore JSON">📂 Restore</label>
         <input type="file" id="json-restore-input" accept=".json" style="display:none;" />
         <button type="button" class="btn" id="btn-print-pdf">🖨️ PDF</button>
-        <button type="button" class="btn" id="btn-theme" title="Εναλλαγή Light / Dark Mode">🌙</button>
+        <button type="button" class="btn" id="btn-lang" title="Switch Language / Αλλαγή Γλώσσας">🇬🇧 EN</button>
+        <button type="button" class="btn" id="btn-theme" title="Light / Dark Mode">🌙</button>
       </div>
     </header>
 
     <nav class="tabs" role="tablist">
-      <button class="tab-btn active" data-tab="today">🎯 Σήμερα (Προτεραιότητες)</button>
-      <button class="tab-btn" data-tab="crm">📊 Βάση &amp; Kanban</button>
-      <button class="tab-btn" data-tab="matcher">🏠 Matcher Ακινήτου</button>
-      <button class="tab-btn" data-tab="forecast">💰 Έσοδα &amp; What-If Lab</button>
-      <button class="tab-btn" data-tab="emails">✉️ Email Templates</button>
-      <button class="tab-btn" data-tab="rules">📐 Κανόνες, Simulator &amp; SQL</button>
+      <button class="tab-btn active" data-tab="today" data-i18n="tabToday">🎯 Σήμερα (Προτεραιότητες)</button>
+      <button class="tab-btn" data-tab="crm" data-i18n="tabCrm">📊 Βάση &amp; Kanban</button>
+      <button class="tab-btn" data-tab="matcher" data-i18n="tabMatcher">🏠 Matcher Ακινήτου</button>
+      <button class="tab-btn" data-tab="forecast" data-i18n="tabForecast">💰 Έσοδα &amp; What-If Lab</button>
+      <button class="tab-btn" data-tab="emails" data-i18n="tabEmails">✉️ Email Templates</button>
+      <button class="tab-btn" data-tab="rules" data-i18n="tabRules">📐 Κανόνες, Simulator &amp; SQL</button>
     </nav>
 
     <!-- =================================================================== -->
@@ -1334,15 +1335,189 @@ LEFT JOIN inbound_activity a ON l.lead_id = a.lead_id;</pre>
       loadFreshSample(); showToast('Επαναφέρθηκε το δείγμα.');
     });
 
+    // =========================================================================
+    // Bilingual Engine (EL <-> EN) — translates static & dynamic UI seamlessly
+    // =========================================================================
+    const STORAGE_LANG = 're_rfm_lang_v3';
+    let currentLang = localStorage.getItem(STORAGE_LANG) || 'el';
+
+    const EN_MAP = [
+      ['Πελάτες, Προτεραιότητες, Kanban & Προβλέψεις Εσόδων', 'Leads, Daily Priorities, Kanban & Revenue Forecasting'],
+      ['Ημερήσια λίστα επαφών, reminders με Calendar (.ics), Kanban board, Matcher νέων ακινήτων, Smart CSV Import & πρόβλεψη προμηθειών.', 'Daily action queue, Calendar (.ics) reminders, Kanban pipeline, Property-to-Buyer Matcher, Smart CSV Import & commission forecasting.'],
+      ['➕ Νέος Πελάτης', '➕ New Lead'],
+      ['🎯 Σήμερα (Προτεραιότητες)', '🎯 Today (Priorities)'],
+      ['📊 Βάση & Kanban', '📊 Database & Kanban'],
+      ['🏠 Matcher Ακινήτου', '🏠 Property Matcher'],
+      ['💰 Έσοδα & What-If Lab', '💰 Forecast & What-If Lab'],
+      ['📐 Κανόνες, Simulator & SQL', '📐 Rules, Simulator & SQL'],
+      ['📅 Ραντεβού / Follow-ups', '📅 Scheduled Follow-ups'],
+      ['σήμερα ή εκπρόθεσμα', 'due today or overdue'],
+      ['⚠️ Alert 45–60 ημερών', '⚠️ 45–60 Day Decay Alert'],
+      ['«Έτοιμοι» πριν πέσουν Σε σκέψη', 'Ready buyers before dropping to Considering'],
+      ['🔥 Έτοιμοι Αγοραστές', '🔥 Ready Buyers'],
+      ['✅ Επικοινωνίες Σήμερα', '✅ Contacted Today'],
+      ['αποθηκευμένες τοπικά', 'saved locally'],
+      ['🎯 Λίστα Προτεραιότητας Ημέρας', '🎯 Daily Priority Action Queue'],
+      ['Πάντα πρώτα τα προγραμματισμένα follow-ups, μετά τα Alerts 45–60 ημερών και τα υψηλά budgets.', 'Scheduled follow-ups first, followed by 45–60 day decay alerts and high-budget buyers.'],
+      ['Top 15 Προτεραιότητες', 'Top 15 Priorities'],
+      ['Μόνο Ραντεβού / Follow-ups', 'Scheduled Follow-ups Only'],
+      ['Μόνο Alert 45–60 ημερών', '45–60 Day Alerts Only'],
+      ['VIP Έτοιμοι (≥ 250.000€)', 'VIP Ready Buyers (≥ €250k)'],
+      ['Νέοι κοντά σε αναβάθμιση', 'New Leads Close to Upgrade'],
+      ['Καθαρισμός «Έγινε»', 'Clear Completed'],
+      ['📋 Πίνακας', '📋 Table'],
+      ['🔄 Επαναφορά Δείγματος', '🔄 Reset Sample (150)'],
+      ['⬇️ Πρότυπο CSV', '⬇️ Sample CSV'],
+      ['📋 Αντιγραφή Emails', '📋 Copy Emails'],
+      ['📍 Top Περιοχές (Έτοιμοι Αγοραστές)', '📍 Top Areas (Ready Buyers)'],
+      ['📣 Απόδοση Καναλιών (% Έτοιμων ανά Πηγή)', '📣 Channel Attribution (% Ready by Source)'],
+      ['Όλα τα Segments', 'All Segments'],
+      ['Όλα τα Tags', 'All Tags'],
+      ['Μόνο Alert 45–60μ', '45–60d Alerts Only'],
+      ['🏠 Matcher Νέου Ακινήτου — «Μπήκε νέο ακίνητο, σε ποιους το στέλνω;»', '🏠 Property-to-Buyer Matcher — "New listing arrived, who should get it?"'],
+      ['Όλες οι περιοχές', 'All Areas'],
+      ['Ανοχή Budget ±10%', 'Budget Tolerance ±10%'],
+      ['Ανοχή Budget ±15%', 'Budget Tolerance ±15%'],
+      ['Ανοχή Budget ±25%', 'Budget Tolerance ±25%'],
+      ['Συμπερίληψη «Σε ψύξη / νάρκη»', 'Include Cold / Dormant'],
+      ['⬇️ Export Λίστας', '⬇️ Export List'],
+      ['💰 Πρόβλεψη Εσόδων & Προμηθειών Γραφείου', '💰 Agency Commission & Revenue Forecast'],
+      ['💰 Συνολικές Αναμενόμενες Προμήθειες', '💰 Total Expected Commissions'],
+      ['σταθμισμένα έσοδα από όλη τη βάση', 'weighted revenue across full database'],
+      ['🔥 Προμήθειες από «Έτοιμους»', '🔥 Commissions from Ready Buyers'],
+      ['άμεσος ορίζοντας 1–2 μηνών', 'near-term 1–2 month horizon'],
+      ['⚠️ Προμήθειες σε Κίνδυνο (Alert 45–60μ)', '⚠️ Commissions at Risk (45–60d Alert)'],
+      ['αν δεν γίνει follow-up αυτή την εβδομάδα', 'if no follow-up happens this week'],
+      ['Μέση Προμήθεια Μεσιτικού (%)', 'Average Brokerage Commission (%)'],
+      ['Πιθανότητα Κλεισίματος — 🔥 Έτοιμος', 'Close Rate — 🔥 Ready Buyer'],
+      ['Πιθανότητα Κλεισίματος — 🌱 Νέος', 'Close Rate — 🌱 New Lead'],
+      ['Πιθανότητα Κλεισίματος — ⌛ Σε σκέψη', 'Close Rate — ⌛ Considering'],
+      ['🧪 What-If Threshold Lab (Πειραματισμός Ορίων)', '🧪 What-If Threshold Lab (Sensitivity Analysis)'],
+      ['Όριο ενεργού παραθύρου (Αρχικό: 60μ)', 'Active Window Limit (Default: 60d)'],
+      ['Όριο VIP Budget (Αρχικό: 200.000€)', 'VIP Budget Threshold (Default: €200k)'],
+      ['Ελάχιστα σήματα χωρίς VIP (Αρχικό: 4+)', 'Min Signals without VIP (Default: 4+)'],
+      ['Ανώτατο όριο «Σε σκέψη» (Αρχικό: 180μ)', 'Max "Considering" Days (Default: 180d)'],
+      ['↩️ Επαναφορά ορίων', '↩️ Reset Thresholds'],
+      ['Σύγκριση: Αρχικοί Κανόνες vs Νέο Σενάριο', 'Comparison: Baseline vs New Scenario'],
+      ['✉️ Έτοιμα Email Templates ανά Segment (Copy–Paste)', '✉️ Ready-to-Use Email Templates by Segment (Copy–Paste)'],
+      ['Χρήση μεταβλητών {{...}}', 'Use {{...}} Placeholders'],
+      ['Έτοιμος αγοραστής', 'Ready Buyer'],
+      ['Νέος ενδιαφερόμενος', 'New Lead'],
+      ['Σε σκέψη', 'Considering'],
+      ['Σε ψύξη', 'Cold'],
+      ['Σε νάρκη', 'Dormant'],
+      ['έως 60 μέρες', 'up to 60 days'],
+      ['61–180 μέρες', '61–180 days'],
+      ['181–365 μέρες', '181–365 days'],
+      ['365+ μέρες', '365+ days'],
+      ['📝 Καρτέλα', '📝 Profile'],
+      ['✅ Έγινε', '✅ Done'],
+      ['Αρχικό', 'Baseline'],
+      ['Νέο', 'New'],
+      ['Διαφορά', 'Delta'],
+      ['Πελάτης & Tags', 'Lead & Tags'],
+      ['Πελάτης', 'Lead'],
+      ['Περιοχή', 'Area'],
+      ['Πηγή', 'Source'],
+      ['Σήματα', 'Signals'],
+      ['Επίσκεψη', 'Visit'],
+      ['Μέρες', 'Days'],
+      ['Προτεραιότητα', 'Priority'],
+      ['Budget Πελάτη', 'Lead Budget'],
+      ['Ενέργεια', 'Action'],
+      ['σήματα', 'signals'],
+      ['μέρες', 'days'],
+      ['Όχι', 'No'],
+      ['Ναι (Επίσκεψη)', 'Yes (Visit)'],
+      ['Ακύρωση', 'Cancel'],
+      ['💾 Αποθήκευση', '💾 Save'],
+      ['🗑️ Διαγραφή', '🗑️ Delete'],
+      ['Καρτέλα Πελάτη', 'Lead Profile'],
+      ['➕ Προσθήκη Νέου Πελάτη', '➕ Add New Lead'],
+      ['📋 Αντιγραφή', '📋 Copy'],
+      ['Θέμα:', 'Subject:'],
+      ['Μετρητά', 'Cash'],
+      ['Δάνειο', 'Mortgage'],
+      ['Επενδυτής', 'Investor'],
+      ['Άμεση αγορά', 'Urgent Buyer'],
+      ['Κενό', 'Empty'],
+      ['Εκπρόθεσμο', 'Overdue'],
+      ['Σήμερα', 'Today']
+    ];
+
+    function translateNodeToEn(root) {
+      if (currentLang !== 'en') return;
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      let n;
+      while ((n = walker.nextNode())) {
+        if (!n.parentElement || ['SCRIPT', 'STYLE', 'PRE'].includes(n.parentElement.tagName)) continue;
+        if (n.nodeValue && n.nodeValue.trim()) nodes.push(n);
+      }
+      nodes.forEach(node => {
+        let txt = node.nodeValue;
+        for (const [el, en] of EN_MAP) {
+          if (txt.includes(el)) txt = txt.replaceAll(el, en);
+        }
+        if (txt !== node.nodeValue) node.nodeValue = txt;
+      });
+      const search = document.getElementById('filter-search');
+      if (search) search.placeholder = 'Search name, email, area...';
+    }
+
+    const EN_EMAIL_TEMPLATES = [
+      { title: '🔥 Ready Buyer — Private Viewing Invite', theme: 'theme-ready', subject: '3 new properties in {{AREA}} matching your budget ({{BUDGET}})', body: 'Hi {{NAME}},\n\nWe handpicked 3 properties in {{AREA}} up to {{BUDGET}} — one is not even listed on public portals yet. Would you be available for a quick viewing this week?\n\nBest regards' },
+      { title: '⚠️ 45–60 Day Alert — Before Dropping to Considering', theme: 'theme-ready', subject: '{{NAME}}, a fresh opportunity just came up in {{AREA}}', body: 'Hi {{NAME}},\n\nJust checking in to see if you are still searching in {{AREA}}. A property just came on the market near {{BUDGET}} with great value per sqm. Would you like me to send photos and the floor plan?' },
+      { title: '🌱 New Lead — Welcome & Qualification', theme: 'theme-new', subject: 'Welcome! Let us find your ideal property in {{AREA}}', body: 'Hi {{NAME}},\n\nThanks for reaching out! Reply with 2 quick details so we only send relevant listings:\n1. What is your ideal purchase timeline?\n2. Any must-have features (parking, floor, renovated)?' },
+      { title: '⌛ Considering (61–180d) — Nurturing & Price Drops', theme: 'theme-think', subject: 'Recent price drops in {{AREA}}', body: 'Hi {{NAME}},\n\nWe know buying a property takes time. We put together 2 recent price reductions in {{AREA}} close to {{BUDGET}}. Let us know if you would like to visit any of them.' },
+      { title: '❄️ Cold (181–365d) — 1-Click Re-engagement', theme: 'theme-cold', subject: 'Still looking for a property in {{AREA}}, {{NAME}}?', body: 'Hi {{NAME}},\n\nJust reply with a number so we keep our updates relevant:\n1️⃣ Still looking in {{AREA}}\n2️⃣ Changed area or budget\n3️⃣ Already bought / no longer looking' }
+    ];
+
+    const origRenderTemplates = renderTemplates;
+    renderTemplates = function() {
+      if (currentLang === 'el') { origRenderTemplates(); return; }
+      const n = document.getElementById('tpl-name').value || '{{Name}}', a = document.getElementById('tpl-area').value || '{{Area}}', b = document.getElementById('tpl-budget').value || '{{Budget}}';
+      const fill = s => s.replaceAll('{{NAME}}', n).replaceAll('{{AREA}}', a).replaceAll('{{BUDGET}}', b);
+      document.getElementById('templates-container').innerHTML = EN_EMAIL_TEMPLATES.map((t, i) => `<div class="email-card"><div class="toolbar" style="margin-bottom:6px;"><span class="badge ${t.theme}" style="font-size:12.5px; padding:4px 10px;">${t.title}</span><button type="button" class="btn btn-sm" data-ce="${i}">📋 Copy</button></div><div style="font-size:13px;"><strong>Subject:</strong> ${fill(t.subject)}</div><div class="email-pre">${fill(t.body)}</div></div>`).join('');
+      document.querySelectorAll('[data-ce]').forEach(btn => btn.addEventListener('click', () => { const t = EN_EMAIL_TEMPLATES[Number(btn.dataset.ce)]; navigator.clipboard?.writeText(`Subject: ${fill(t.subject)}\n\n${fill(t.body)}`); showToast('Copied to clipboard!'); }));
+    };
+
+    const origRenderAll = renderAll;
+    renderAll = function() {
+      origRenderAll();
+      if (currentLang === 'en') translateNodeToEn(document.body);
+    };
+
+    const origOpenLeadModal = openLeadModal;
+    openLeadModal = function(id) {
+      origOpenLeadModal(id);
+      if (currentLang === 'en') translateNodeToEn(document.getElementById('modal-lead'));
+    };
+
+    document.getElementById('btn-lang').textContent = currentLang === 'en' ? '🇬🇷 EL' : '🇬🇧 EN';
+    document.getElementById('btn-lang').addEventListener('click', () => {
+      const next = currentLang === 'en' ? 'el' : 'en';
+      localStorage.setItem(STORAGE_LANG, next);
+      location.reload();
+    });
+
     (function init() {
       const saved = localStorage.getItem(STORAGE_LEADS);
       if (saved) {
         try {
           const p = JSON.parse(saved);
-          if (Array.isArray(p) && p.length) { allLeads = p.map((r, i) => enrichLead(r, i)); renderAll(); return; }
+          if (Array.isArray(p) && p.length) {
+            allLeads = p.map((r, i) => enrichLead(r, i));
+            renderAll(); renderTemplates(); updateSimulator();
+            if (currentLang === 'en') translateNodeToEn(document.body);
+            return;
+          }
         } catch {}
       }
-      loadFreshSample();
+      loadFreshSample().then(() => {
+        renderTemplates(); updateSimulator();
+        if (currentLang === 'en') translateNodeToEn(document.body);
+      });
     })();
   </script>
 </body>
