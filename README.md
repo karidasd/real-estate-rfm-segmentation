@@ -9,6 +9,8 @@
 🌐 **Live Web App:** https://karidasd.github.io/real-estate-rfm-segmentation/  
 📦 **Repository:** https://github.com/karidasd/real-estate-rfm-segmentation
 
+![Real Estate RFM Mini-CRM Preview](assets/preview.jpg)
+
 ---
 
 ## ✨ Key Application Features (100% Local / Zero Backend / GDPR-Safe)
