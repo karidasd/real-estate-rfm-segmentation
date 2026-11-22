@@ -1,0 +1,17 @@
+{
+  "name": "Real Estate RFM Mini-CRM",
+  "short_name": "RFM CRM",
+  "description": "Διαχείριση πελατών Real Estate, RFM segmentation, Matcher ακινήτων και πρόβλεψη προμηθειών.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#1b2130",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
