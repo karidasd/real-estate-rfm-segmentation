@@ -3,22 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Real Estate RFM Segmentation — Suite, What-If Lab &amp; Email Playbook</title>
+  <title>Real Estate RFM CRM — Καθημερινή Εφαρμογή Πελατών &amp; Καμπανιών</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f6f8fa;
+      --bg: #f5f7fa;
       --surface: #ffffff;
-      --border: #e5e8ee;
-      --text: #1f2430;
-      --muted: #5f687a;
+      --border: #e4e8f0;
+      --text: #1b2130;
+      --muted: #5d6678;
       --accent: #1d4ed8;
       --radius: 16px;
       --shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
 
-      /* Segment Palette */
       --ready-bg: #fceae3;   --ready-border: #f5c7b6;   --ready-text: #b8431b;
       --new-bg: #e7f6ec;     --new-border: #bfe5cc;     --new-text: #1d6f42;
       --think-bg: #fdf3db;   --think-border: #f3db9d;   --think-text: #9b6a08;
@@ -32,108 +31,93 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
-    .container { max-width: 1160px; margin: 0 auto; padding: 26px 20px 64px; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 22px 18px 64px; }
 
     /* Header */
     header {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 24px 28px;
+      padding: 20px 24px;
       box-shadow: var(--shadow);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
     .eyebrow {
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
     }
-    header h1 { margin: 0 0 6px; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
-    header p { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 700px; }
-    .header-badges { display: flex; gap: 8px; flex-wrap: wrap; }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      background: #f1f5f9;
-      color: #334155;
-      border: 1px solid #e2e8f0;
-    }
+    header h1 { margin: 0 0 4px; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+    header p { margin: 0; color: var(--muted); font-size: 13.5px; max-width: 620px; }
+    .header-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 
     /* Tabs */
-    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .tabs { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 18px; }
     .tab-btn {
-      appearance: none;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      font-family: inherit;
-      font-size: 13.5px;
-      font-weight: 600;
-      padding: 9px 15px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.15s ease;
+      appearance: none; border: 1px solid var(--border); background: var(--surface);
+      color: var(--muted); font-family: inherit; font-size: 13.5px; font-weight: 600;
+      padding: 9px 14px; border-radius: 12px; cursor: pointer; transition: all 0.15s ease;
     }
     .tab-btn:hover { border-color: #cbd5e1; color: var(--text); }
-    .tab-btn.active { background: var(--text); color: #ffffff; border-color: var(--text); }
+    .tab-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
 
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* Cards & Panels */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 22px;
+    /* Panels & Grids */
+    .panel {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow); margin-bottom: 16px;
     }
-    .segment-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
+    .panel h2 { margin: 0 0 10px; font-size: 16.5px; font-weight: 700; }
+    .panel h3 { margin: 0 0 10px; font-size: 14.5px; font-weight: 700; }
+    .two-col { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 16px; }
+    .equal-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .kpi-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow);
     }
-    .segment-card.full-width { grid-column: 1 / -1; }
-    .segment-banner {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      margin-bottom: 14px;
-    }
-    .segment-icon {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255, 255, 255, 0.88);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; flex-shrink: 0;
-    }
-    .segment-title { font-size: 16px; font-weight: 700; margin: 0; }
-    .segment-sub { font-size: 12.5px; color: var(--muted); margin: 0; }
-    .segment-desc { margin: 0 0 12px; font-size: 14px; color: #2d3444; }
-    .transitions { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
-    .transitions li { font-size: 13.5px; color: #3b4252; display: flex; align-items: flex-start; gap: 8px; }
-    .arrow-up { color: #16803d; font-weight: 700; }
-    .arrow-down { color: #b8431b; font-weight: 700; }
+    .kpi-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 3px; }
+    .kpi-value { font-size: 21px; font-weight: 700; }
+    .kpi-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
 
+    /* Buttons & Inputs */
+    .btn {
+      appearance: none; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      font-family: inherit; font-size: 13px; font-weight: 600; padding: 8px 13px;
+      border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+      text-decoration: none;
+    }
+    .btn:hover { background: #f1f5f9; }
+    .btn-sm { padding: 5px 9px; font-size: 12px; border-radius: 8px; }
+    .btn-primary { background: var(--text); color: #fff; border-color: var(--text); }
+    .btn-primary:hover { background: #334155; }
+    .btn-green { background: #16803d; color: #fff; border-color: #16803d; }
+    .btn-green:hover { background: #146c33; }
+    .btn-danger { color: #b91c1c; border-color: #fecaca; background: #fef2f2; }
+    .btn-danger:hover { background: #fee2e2; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+
+    .input-text, .select-box, textarea {
+      padding: 8px 11px; border: 1px solid var(--border); border-radius: 10px;
+      font-family: inherit; font-size: 13.5px; background: #fff; color: var(--text);
+    }
+    textarea { width: 100%; resize: vertical; min-height: 76px; }
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+    .form-label span.val { color: var(--accent); font-weight: 700; }
+    input[type="range"] { width: 100%; accent-color: var(--text); cursor: pointer; }
+
+    /* Segment Themes & Badges */
     .theme-ready   { background: var(--ready-bg);   border-color: var(--ready-border); }
     .theme-ready .segment-title { color: var(--ready-text); }
     .theme-new     { background: var(--new-bg);     border-color: var(--new-border); }
@@ -145,141 +129,112 @@
     .theme-dormant { background: var(--dormant-bg); border-color: var(--dormant-border); }
     .theme-dormant .segment-title { color: var(--dormant-text); }
 
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px 24px;
-      box-shadow: var(--shadow);
-      margin-bottom: 18px;
-    }
-    .panel h2 { margin: 0 0 12px; font-size: 17px; font-weight: 700; }
-    .panel h3 { margin: 0 0 10px; font-size: 15px; font-weight: 700; }
-
-    .rfm-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .rfm-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
-    .rfm-box strong { display: block; margin-bottom: 4px; font-size: 14px; }
-    .rfm-box p { margin: 0; font-size: 13.5px; color: var(--muted); }
-
-    /* Two-column layouts */
-    .two-col { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 18px; }
-    .equal-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-
-    /* Inputs */
-    .form-group { margin-bottom: 16px; }
-    .form-label { display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; }
-    .form-label span.val { color: var(--accent); font-weight: 700; }
-    input[type="range"] { width: 100%; accent-color: var(--text); cursor: pointer; }
-    .toggle-row { display: flex; gap: 10px; }
-    .toggle-btn {
-      flex: 1; padding: 9px; border-radius: 10px; border: 1px solid var(--border);
-      background: #f8fafc; font-family: inherit; font-weight: 600; font-size: 13.5px; cursor: pointer;
-    }
-    .toggle-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
-    .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .preset-btn {
-      border: 1px solid var(--border); background: #fff; padding: 6px 11px;
-      border-radius: 8px; font-size: 12.5px; font-weight: 500; cursor: pointer; color: #334155;
-    }
-    .preset-btn:hover { background: #f1f5f9; }
-
-    .result-box { border-radius: 14px; padding: 20px; border: 1px solid var(--border); margin-bottom: 14px; }
-    .alert-banner {
-      background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412;
-      border-radius: 10px; padding: 10px 14px; font-size: 13px; font-weight: 600; margin-top: 12px;
-    }
-    .action-card {
-      background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; font-size: 13.5px;
-    }
-    .action-card h4 { margin: 0 0 6px; font-size: 13.5px; }
-
-    /* Buttons & Toolbars */
-    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-    .btn-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    .btn {
-      appearance: none; border: 1px solid var(--border); background: var(--surface); color: var(--text);
-      font-family: inherit; font-size: 13px; font-weight: 600; padding: 8px 14px;
-      border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
-    }
-    .btn:hover { background: #f1f5f9; }
-    .btn-primary { background: var(--text); color: #fff; border-color: var(--text); }
-    .btn-primary:hover { background: #334155; }
-    .privacy-note { font-size: 12px; color: var(--muted); }
-
-    /* KPIs */
-    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
-    .kpi-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-      padding: 15px 17px; box-shadow: var(--shadow);
-    }
-    .kpi-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
-    .kpi-value { font-size: 21px; font-weight: 700; }
-    .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-    /* Bars */
-    .bar-row {
-      display: grid; grid-template-columns: 175px 1fr 145px; align-items: center; gap: 12px;
-      padding: 7px 10px; border-radius: 10px; cursor: pointer; transition: background 0.12s ease;
-    }
-    .bar-row:hover { background: #f8fafc; }
-    .bar-track { height: 11px; background: #f1f5f9; border-radius: 999px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 999px; transition: width 0.25s ease; }
-    .bar-meta { font-size: 12.5px; text-align: right; color: var(--muted); font-weight: 600; }
-
-    /* Table */
-    .filters-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
-    .input-text, .select-box {
-      padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px;
-      font-family: inherit; font-size: 13.5px; background: #fff;
-    }
-    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
-    th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid #eef1f5; white-space: nowrap; }
-    th { background: #f8fafc; font-weight: 600; color: var(--muted); font-size: 12px; }
-    tr:last-child td { border-bottom: none; }
-
     .badge {
       display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px;
       border-radius: 999px; font-size: 12px; font-weight: 600; border: 1px solid transparent;
     }
     .badge-alert { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
+    .badge-match { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+    .badge-done  { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+
+    /* Action Queue Cards */
+    .queue-item {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;
+      padding: 14px 16px; border: 1px solid var(--border); border-radius: 13px;
+      background: #fff; margin-bottom: 10px; transition: border-color 0.15s ease;
+    }
+    .queue-item:hover { border-color: #cbd5e1; }
+    .queue-item.done { opacity: 0.58; background: #f8fafc; }
+    .queue-left { display: flex; align-items: flex-start; gap: 12px; min-width: 260px; flex: 1; }
+    .priority-dot {
+      min-width: 42px; height: 42px; border-radius: 12px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;
+    }
+    .queue-meta { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+    .queue-reason { font-size: 12.5px; font-weight: 600; margin-top: 4px; color: #334155; }
+
+    /* Bars & Tables */
+    .bar-row {
+      display: grid; grid-template-columns: 175px 1fr 140px; align-items: center; gap: 10px;
+      padding: 6px 8px; border-radius: 9px; cursor: pointer;
+    }
+    .bar-row:hover { background: #f8fafc; }
+    .bar-track { height: 10px; background: #f1f5f9; border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 999px; transition: width 0.25s ease; }
+    .bar-meta { font-size: 12.5px; text-align: right; color: var(--muted); font-weight: 600; }
+
+    .filters-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+    th, td { padding: 9px 11px; text-align: left; border-bottom: 1px solid #eef1f5; white-space: nowrap; }
+    th { background: #f8fafc; font-weight: 600; color: var(--muted); font-size: 12px; }
+    tr:last-child td { border-bottom: none; }
+    tbody tr.clickable { cursor: pointer; }
+    tbody tr.clickable:hover { background: #f8fafc; }
+
+    /* Segment Reference Cards */
+    .cards-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
+    .segment-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+    .segment-card.full-width { grid-column: 1 / -1; }
+    .segment-banner { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 11px; border: 1px solid transparent; margin-bottom: 10px; }
+    .segment-icon { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.88); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+    .segment-title { font-size: 15.5px; font-weight: 700; margin: 0; }
+    .segment-sub { font-size: 12px; color: var(--muted); margin: 0; }
+    .transitions { list-style: none; padding: 0; margin: 8px 0 0; font-size: 13px; color: #3b4252; }
+
+    .toggle-row { display: flex; gap: 8px; }
+    .toggle-btn { flex: 1; padding: 8px; border-radius: 9px; border: 1px solid var(--border); background: #f8fafc; font-weight: 600; cursor: pointer; font-size: 13px; }
+    .toggle-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+    .result-box { border-radius: 13px; padding: 18px; border: 1px solid var(--border); margin-bottom: 12px; }
+    .action-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 13px 15px; font-size: 13.5px; }
+    .action-card h4 { margin: 0 0 5px; font-size: 13.5px; }
     .delta-pos { color: #16803d; font-weight: 700; }
     .delta-neg { color: #b8431b; font-weight: 700; }
     .delta-zero { color: #64748b; }
 
-    /* Email templates */
-    .email-card {
-      border: 1px solid var(--border); border-radius: 14px; padding: 18px;
-      background: #fff; margin-bottom: 14px;
+    .email-card { border: 1px solid var(--border); border-radius: 14px; padding: 16px; background: #fff; margin-bottom: 12px; }
+    .email-pre { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 13px; font-size: 13.5px; white-space: pre-wrap; margin: 8px 0 0; }
+    pre.code-block { background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 14px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.55; margin: 0; }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(15, 23, 42, 0.52);
+      display: none; align-items: center; justify-content: center; padding: 18px; z-index: 1000;
     }
-    .email-pre {
-      background: #f8fafc; border: 1px solid var(--border); border-radius: 10px;
-      padding: 14px; font-size: 13.5px; white-space: pre-wrap; margin: 10px 0 0; color: #1e293b;
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 18px; max-width: 620px; width: 100%;
+      max-height: 90vh; overflow-y: auto; padding: 22px 24px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22);
+    }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .modal-header h3 { margin: 0; font-size: 18px; }
+    .close-btn { border: none; background: #f1f5f9; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 22px; right: 22px; background: #1e293b; color: #fff;
+      padding: 11px 16px; border-radius: 11px; font-size: 13.5px; font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px);
+      transition: all 0.2s ease; pointer-events: none; z-index: 2000;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* Print Report Section (hidden on screen, shown on PDF print) */
+    #print-report { display: none; }
+    @media print {
+      body { background: #fff; }
+      header, nav.tabs, .tab-panel, footer, .modal-backdrop, .toast { display: none !important; }
+      #print-report { display: block !important; padding: 0; }
+      #print-report h1 { font-size: 20px; margin: 0 0 4px; }
+      #print-report table { font-size: 12px; }
     }
 
-    /* Code & Quiz */
-    pre.code-block {
-      background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 16px;
-      overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.6;
-      margin: 0;
-    }
-    .quiz-q {
-      border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px;
-      margin-bottom: 12px; background: #f8fafc;
-    }
-    .quiz-opts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .quiz-opt {
-      border: 1px solid var(--border); background: #fff; padding: 7px 12px;
-      border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
-    }
-    .quiz-opt:hover { background: #f1f5f9; }
-    .quiz-feedback { margin-top: 8px; font-size: 13px; font-weight: 600; }
-
-    footer { margin-top: 32px; text-align: center; font-size: 13px; color: var(--muted); }
-
+    footer { margin-top: 28px; text-align: center; font-size: 12.5px; color: var(--muted); }
     @media (max-width: 860px) {
-      .cards-grid, .rfm-grid, .two-col, .equal-col, .kpi-grid { grid-template-columns: 1fr; }
-      .bar-row { grid-template-columns: 130px 1fr 110px; }
+      .cards-grid, .two-col, .equal-col, .kpi-grid, .form-grid { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 130px 1fr 105px; }
     }
   </style>
 </head>
@@ -287,217 +242,91 @@
   <div class="container">
     <header>
       <div>
-        <div class="eyebrow">Data Analyst Case Study · Real Estate CRM Suite</div>
-        <h1>RFM Lead Segmentation, What-If Lab &amp; Campaign Exporter</h1>
-        <p>
-          Ολοκληρωμένη προσαρμογή της λογικής <strong>RFM</strong> στα ακίνητα — με <strong>Segment Simulator</strong>,
-          <strong>τοπικό CSV Analyzer</strong>, <strong>What-If Threshold Lab</strong>, έτοιμα <strong>Email Templates</strong> και <strong>SQL/Python Playground</strong>.
-        </p>
+        <div class="eyebrow">Real Estate RFM Mini-CRM · 100% Local &amp; GDPR-Safe</div>
+        <h1>Διαχείριση Πελατών, Προτεραιότητες &amp; Καμπάνιες</h1>
+        <p>Καθημερινή λίστα επαφών, ταίριασμα νέων ακινήτων σε αγοραστές, έξυπνο import από οποιοδήποτε CRM CSV και στοχευμένα email/WhatsApp.</p>
       </div>
-      <div class="header-badges">
-        <span class="pill">5 Lifecycle Segments</span>
-        <span class="pill">100% Client-Side (GDPR-Safe)</span>
-        <span class="pill">Excel CSV (UTF-8 BOM)</span>
+      <div class="header-actions">
+        <button type="button" class="btn btn-primary" id="btn-open-new-lead">➕ Νέος Πελάτης</button>
+        <label class="btn" for="csv-file-input">📁 Import CSV (Οποιοδήποτε CRM)</label>
+        <input type="file" id="csv-file-input" accept=".csv" style="display:none;" />
+        <button type="button" class="btn" id="btn-print-pdf">🖨️ Αναφορά PDF</button>
       </div>
     </header>
 
     <nav class="tabs" role="tablist">
-      <button class="tab-btn active" data-tab="rules">1. Κανόνες &amp; RFM</button>
-      <button class="tab-btn" data-tab="simulator">2. Simulator</button>
-      <button class="tab-btn" data-tab="analyzer">3. CSV Analyzer &amp; Export</button>
-      <button class="tab-btn" data-tab="whatif">4. What-If Lab</button>
-      <button class="tab-btn" data-tab="emails">5. Email Templates</button>
-      <button class="tab-btn" data-tab="code">6. SQL / Python &amp; Quiz</button>
+      <button class="tab-btn active" data-tab="today">🎯 Σήμερα (Προτεραιότητες)</button>
+      <button class="tab-btn" data-tab="crm">📊 Βάση Πελατών &amp; Export</button>
+      <button class="tab-btn" data-tab="matcher">🏠 Matcher Νέου Ακινήτου</button>
+      <button class="tab-btn" data-tab="emails">✉️ Email Templates</button>
+      <button class="tab-btn" data-tab="whatif">🧪 What-If Lab</button>
+      <button class="tab-btn" data-tab="rules">📐 Κανόνες, Simulator &amp; Κώδικας</button>
     </nav>
 
     <!-- =================================================================== -->
-    <!-- TAB 1: RULES                                                        -->
+    <!-- TAB 1: DAILY ACTION QUEUE ("ΤΙ ΚΑΝΩ ΣΗΜΕΡΑ")                        -->
     <!-- =================================================================== -->
-    <section id="tab-rules" class="tab-panel active">
-      <div class="eyebrow" style="margin-bottom: 12px;">ΣΤΟ ΚΟΥΤΙ «SEGMENT», ΠΑΝΩ ΔΕΞΙΑ ΣΤΗΝ ΚΑΡΤΕΛΑ</div>
-      <div class="cards-grid">
-        <article class="segment-card">
-          <div class="segment-banner theme-ready">
-            <div class="segment-icon">🔥</div>
-            <div><h3 class="segment-title">Έτοιμος αγοραστής</h3><p class="segment-sub">έως 60 μέρες</p></div>
-          </div>
-          <p class="segment-desc">
-            Κινήθηκε τις τελευταίες 60 μέρες και έκανε επίσκεψη <strong>ή</strong> έδειξε 4+ σήματα,
-            <strong>ή</strong> 2–3 σήματα με budget από 200.000€.
-          </p>
-          <ul class="transitions">
-            <li><span class="arrow-down">↓</span> Σε σκέψη μετά από 60 μέρες χωρίς κίνηση</li>
-          </ul>
-        </article>
-
-        <article class="segment-card">
-          <div class="segment-banner theme-new">
-            <div class="segment-icon">🌱</div>
-            <div><h3 class="segment-title">Νέος ενδιαφερόμενος</h3><p class="segment-sub">έως 60 μέρες</p></div>
-          </div>
-          <p class="segment-desc">Κινήθηκε τις τελευταίες 60 μέρες, αλλά δεν πληροί ακόμα τα κριτήρια του Έτοιμου.</p>
-          <ul class="transitions">
-            <li><span class="arrow-up">↑</span> Έτοιμος με επίσκεψη, 4+ σήματα ή 2–3 σήματα και budget από 200.000€</li>
-            <li><span class="arrow-down">↓</span> Σε σκέψη μετά από 60 μέρες χωρίς κίνηση</li>
-          </ul>
-        </article>
-
-        <article class="segment-card">
-          <div class="segment-banner theme-think">
-            <div class="segment-icon">⌛</div>
-            <div><h3 class="segment-title">Σε σκέψη</h3><p class="segment-sub">61–180 μέρες</p></div>
-          </div>
-          <p class="segment-desc">Δεν έχει κινηθεί για 2 έως 6 μήνες. Το σκέφτεται ακόμα.</p>
-          <ul class="transitions">
-            <li><span class="arrow-up">↑</span> Με νέα κίνηση γίνεται Νέος ή Έτοιμος</li>
-            <li><span class="arrow-down">↓</span> Σε ψύξη μετά τις 180 μέρες</li>
-          </ul>
-        </article>
-
-        <article class="segment-card">
-          <div class="segment-banner theme-cold">
-            <div class="segment-icon">❄️</div>
-            <div><h3 class="segment-title">Σε ψύξη</h3><p class="segment-sub">181–365 μέρες</p></div>
-          </div>
-          <p class="segment-desc">Δεν έχει κινηθεί για 6 έως 12 μήνες.</p>
-          <ul class="transitions">
-            <li><span class="arrow-up">↑</span> Με νέα κίνηση γίνεται Νέος ή Έτοιμος</li>
-            <li><span class="arrow-down">↓</span> Σε νάρκη μετά τις 365 μέρες</li>
-          </ul>
-        </article>
-
-        <article class="segment-card full-width">
-          <div class="segment-banner theme-dormant">
-            <div class="segment-icon">🌙</div>
-            <div><h3 class="segment-title">Σε νάρκη</h3><p class="segment-sub">365+ μέρες</p></div>
-          </div>
-          <p class="segment-desc">Δεν έχει κινηθεί για πάνω από έναν χρόνο. Μένει εδώ μόνιμα.</p>
-          <ul class="transitions">
-            <li><span class="arrow-up">↑</span> Με νέα κίνηση γίνεται Νέος ή Έτοιμος</li>
-          </ul>
-        </article>
+    <section id="tab-today" class="tab-panel active">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">⚠️ Alert 45–60 ημερών</div>
+          <div class="kpi-value" id="t-kpi-alert" style="color:#c2410c;">—</div>
+          <div class="kpi-sub">«Έτοιμοι» πριν πέσουν Σε σκέψη</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">🔥 Έτοιμοι Αγοραστές</div>
+          <div class="kpi-value" id="t-kpi-ready">—</div>
+          <div class="kpi-sub" id="t-kpi-budget">Pipeline Budget</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">🌱 Κοντά σε αναβάθμιση</div>
+          <div class="kpi-value" id="t-kpi-almost">—</div>
+          <div class="kpi-sub">Νέοι με 2–3 σήματα</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">✅ Επικοινωνίες Σήμερα</div>
+          <div class="kpi-value" id="t-kpi-done" style="color:#16803d;">0</div>
+          <div class="kpi-sub">αποθηκευμένες τοπικά</div>
+        </div>
       </div>
 
       <div class="panel">
-        <h2>Πώς μεταφράστηκε το κλασικό RFM στο Real Estate</h2>
-        <div class="rfm-grid">
-          <div class="rfm-box">
-            <strong>R — Recency (Πρόσφατη κίνηση)</strong>
-            <p>Ημέρες από την τελευταία <em>εισερχόμενη</em> επαφή του πελάτη (αγνοώντας τα δικά μας follow-ups). Ορίζει τα 4 χρονικά παράθυρα (0–60, 61–180, 181–365, 365+).</p>
-          </div>
-          <div class="rfm-box">
-            <strong>F — Frequency (Σήματα &amp; Επίσκεψη)</strong>
-            <p>Αριθμός αιτημάτων/επικοινωνιών (2–3 ή 4+ σήματα) και η επίσκεψη σε ακίνητο ως ισχυρό σήμα πρόθεσης αγοράς.</p>
-          </div>
-          <div class="rfm-box">
-            <strong>M — Monetary (Budget)</strong>
-            <p>Το δηλωμένο budget (≥ 200.000€) λειτουργεί ως επιταχυντής: αρκούν 2–3 σήματα για να θεωρηθεί «Έτοιμος αγοραστής».</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =================================================================== -->
-    <!-- TAB 2: SIMULATOR                                                    -->
-    <!-- =================================================================== -->
-    <section id="tab-simulator" class="tab-panel">
-      <div class="two-col">
-        <div class="panel">
-          <h2>Δοκίμασε σενάρια πελάτη</h2>
-          <div class="form-group">
-            <div class="form-label">
-              <span>Ημέρες από τελευταία εισερχόμενη κίνηση (Recency)</span>
-              <span class="val" id="val-days">22 μέρες</span>
-            </div>
-            <input type="range" id="sim-days" min="0" max="450" value="22" />
-          </div>
-
-          <div class="form-group">
-            <div class="form-label">
-              <span>Πλήθος σημάτων / αιτημάτων (Frequency)</span>
-              <span class="val" id="val-signals">2 σήματα</span>
-            </div>
-            <input type="range" id="sim-signals" min="1" max="10" value="2" />
-          </div>
-
-          <div class="form-group">
-            <div class="form-label">
-              <span>Δηλωμένο Budget (Monetary)</span>
-              <span class="val" id="val-budget">240.000 €</span>
-            </div>
-            <input type="range" id="sim-budget" min="50000" max="600000" step="10000" value="240000" />
-          </div>
-
-          <div class="form-group">
-            <div class="form-label"><span>Έχει κάνει επίσκεψη (υπόδειξη ακινήτου);</span></div>
-            <div class="toggle-row">
-              <button type="button" class="toggle-btn active" id="btn-visit-no">Όχι</button>
-              <button type="button" class="toggle-btn" id="btn-visit-yes">Ναι (Επίσκεψη)</button>
-            </div>
-          </div>
-
+        <div class="toolbar">
           <div>
-            <div class="form-label"><span>Γρήγορα παραδείγματα:</span></div>
-            <div class="presets">
-              <button type="button" class="preset-btn" data-preset="vip">VIP Budget 250k + 2 σήματα</button>
-              <button type="button" class="preset-btn" data-preset="atrisk">Έτοιμος σε κίνδυνο (55μ)</button>
-              <button type="button" class="preset-btn" data-preset="new">Νέος (150k, 2 σήματα)</button>
-              <button type="button" class="preset-btn" data-preset="think">Σε σκέψη (110μ)</button>
-              <button type="button" class="preset-btn" data-preset="cold">Σε ψύξη (240μ)</button>
-            </div>
+            <h2 style="margin:0;">🎯 Λίστα Προτεραιότητας Ημέρας</h2>
+            <span style="font-size:12.5px; color:var(--muted);">Αυτόματη κατάταξη (Priority Score) ώστε να καλείς πρώτα όσους έχουν τη μεγαλύτερη αξία ή κινδυνεύουν να χαθούν.</span>
+          </div>
+          <div class="btn-group">
+            <select id="today-filter" class="select-box">
+              <option value="TOP">Top 15 Προτεραιότητες</option>
+              <option value="ALERT">Μόνο Alert 45–60 ημερών</option>
+              <option value="VIP">VIP Έτοιμοι (≥ 250.000€)</option>
+              <option value="ALMOST">Νέοι κοντά σε αναβάθμιση</option>
+            </select>
+            <button type="button" class="btn btn-sm" id="btn-reset-done">Καθαρισμός «Ολοκληρωμένων»</button>
           </div>
         </div>
-
-        <div class="panel">
-          <h2>Αποτέλεσμα Κατηγοριοποίησης</h2>
-          <div id="sim-result" class="result-box"></div>
-          <div id="sim-action" class="action-card"></div>
-        </div>
+        <div id="today-queue"></div>
       </div>
     </section>
 
     <!-- =================================================================== -->
-    <!-- TAB 3: CSV ANALYZER & MARKETING ATTRIBUTION                         -->
+    <!-- TAB 2: FULL CRM DATABASE, ATTRIBUTION & EXPORT                      -->
     <!-- =================================================================== -->
-    <section id="tab-analyzer" class="tab-panel">
+    <section id="tab-crm" class="tab-panel">
       <div class="panel">
         <div class="toolbar">
           <div class="btn-group">
-            <button type="button" class="btn btn-primary" id="btn-load-sample">📊 Δείγμα (150 Πελάτες)</button>
-            <label class="btn" for="csv-file-input">📁 Ανέβασμα δικού σου CSV</label>
-            <input type="file" id="csv-file-input" accept=".csv" style="display:none;" />
+            <button type="button" class="btn" id="btn-load-sample">🔄 Επαναφορά Δείγματος (150)</button>
             <button type="button" class="btn" id="btn-download-template">⬇️ Πρότυπο CSV</button>
           </div>
-          <span class="privacy-note">🔒 100% τοπική επεξεργασία στον browser — υποστηρίζει κόμμα (,) &amp; ερωτηματικό (;).</span>
-        </div>
-
-        <div class="kpi-grid">
-          <div class="kpi-card">
-            <div class="kpi-label">Σύνολο Πελατών</div>
-            <div class="kpi-value" id="kpi-total">—</div>
-            <div class="kpi-sub">ενεργή βάση CRM</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">🔥 Έτοιμοι Αγοραστές</div>
-            <div class="kpi-value" id="kpi-ready">—</div>
-            <div class="kpi-sub" id="kpi-ready-pct">ποσοστό βάσης</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Pipeline Budget (Έτοιμοι)</div>
-            <div class="kpi-value" id="kpi-budget">—</div>
-            <div class="kpi-sub">εκτιμώμενη ζήτηση</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">⚠️ Alert 45–60 ημερών</div>
-            <div class="kpi-value" id="kpi-alert">—</div>
-            <div class="kpi-sub">«Έτοιμοι» πριν πέσουν Σε σκέψη</div>
-          </div>
+          <span style="font-size:12px; color:var(--muted);">💾 Οι αλλαγές (νέοι πελάτες, κινήσεις, σημειώσεις) αποθηκεύονται αυτόματα στον browser σου.</span>
         </div>
 
         <h3>Κατανομή ανά Segment (κλικ σε μπάρα για φιλτράρισμα)</h3>
-        <div id="chart-container" style="margin-bottom: 20px;"></div>
+        <div id="chart-container" style="margin-bottom: 18px;"></div>
 
-        <div class="equal-col" style="margin-bottom: 22px;">
+        <div class="equal-col" style="margin-bottom: 18px;">
           <div style="background:#f8fafc; border:1px solid var(--border); border-radius:12px; padding:14px 16px;">
             <h3>📍 Top Περιοχές (Έτοιμοι Αγοραστές)</h3>
             <div id="area-chart"></div>
@@ -509,7 +338,7 @@
         </div>
 
         <div class="filters-row">
-          <input type="text" id="filter-search" class="input-text" placeholder="Αναζήτηση ονόματος, email ή περιοχής..." style="min-width: 230px;" />
+          <input type="text" id="filter-search" class="input-text" placeholder="Αναζήτηση ονόματος, email, περιοχής..." style="min-width: 220px;" />
           <select id="filter-segment" class="select-box">
             <option value="ALL">Όλα τα Segments</option>
             <option value="Έτοιμος αγοραστής">🔥 Έτοιμος αγοραστής</option>
@@ -518,7 +347,7 @@
             <option value="Σε ψύξη">❄️ Σε ψύξη</option>
             <option value="Σε νάρκη">🌙 Σε νάρκη</option>
           </select>
-          <label style="font-size: 13px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+          <label style="font-size: 13px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer;">
             <input type="checkbox" id="filter-alert" /> Μόνο Alert 45–60μ
           </label>
           <div class="btn-group" style="margin-left: auto;">
@@ -527,6 +356,7 @@
           </div>
         </div>
 
+        <p style="font-size:12px; color:var(--muted); margin:0 0 8px;">💡 Κάνε <strong>κλικ σε οποιονδήποτε πελάτη</strong> για να ανοίξεις την καρτέλα του (σημειώσεις &amp; καταγραφή νέας επαφής/επίσκεψης).</p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -542,76 +372,48 @@
     </section>
 
     <!-- =================================================================== -->
-    <!-- TAB 4: WHAT-IF THRESHOLD LAB                                        -->
+    <!-- TAB 3: PROPERTY-TO-BUYER MATCHER                                    -->
     <!-- =================================================================== -->
-    <section id="tab-whatif" class="tab-panel">
-      <div class="two-col">
-        <div class="panel">
-          <h2>🧪 What-If Threshold Lab (Sensitivity Analysis)</h2>
-          <p style="font-size:13.5px; color:var(--muted); margin-top:0;">
-            Πειραματίσου με τα όρια του μοντέλου σου πάνω στο τρέχον dataset (<strong><span id="whatif-n">150</span> πελάτες</strong>)
-            και δες άμεσα πώς αλλάζουν τα segments σε σχέση με τον αρχικό κανόνα!
-          </p>
-
-          <div class="form-group">
-            <div class="form-label">
-              <span>Όριο ενεργού παραθύρου (Αρχικό: 60 μέρες)</span>
-              <span class="val" id="wi-val-active">60 μέρες</span>
-            </div>
-            <input type="range" id="wi-active" min="30" max="120" step="5" value="60" />
+    <section id="tab-matcher" class="tab-panel">
+      <div class="panel">
+        <h2>🏠 Matcher Νέου Ακινήτου — «Μπήκε νέο ακίνητο, σε ποιους το στέλνω;»</h2>
+        <p style="font-size:13.5px; color:var(--muted); margin-top:0;">
+          Βάλε περιοχή και τιμή του νέου ακινήτου για να βρεις αμέσως τους πιο ζεστούς αγοραστές στη βάση σου και να εξάγεις τη λίστα καμπάνιας.
+        </p>
+        <div class="filters-row">
+          <select id="m-area" class="select-box" style="min-width:170px;"></select>
+          <input type="number" id="m-price" class="input-text" value="250000" step="10000" min="30000" style="width:150px;" placeholder="Τιμή (€)" />
+          <select id="m-tol" class="select-box">
+            <option value="0.10">Ανοχή Budget ±10%</option>
+            <option value="0.15" selected>Ανοχή Budget ±15%</option>
+            <option value="0.25">Ανοχή Budget ±25%</option>
+          </select>
+          <label style="font-size:13px; display:inline-flex; align-items:center; gap:5px; cursor:pointer;">
+            <input type="checkbox" id="m-include-cold" /> Συμπερίληψη «Σε ψύξη / νάρκη»
+          </label>
+          <div class="btn-group" style="margin-left:auto;">
+            <button type="button" class="btn" id="btn-match-copy">📋 Αντιγραφή Emails</button>
+            <button type="button" class="btn btn-primary" id="btn-match-export">⬇️ Export Λίστας</button>
           </div>
-
-          <div class="form-group">
-            <div class="form-label">
-              <span>Όριο VIP Budget (Αρχικό: 200.000 €)</span>
-              <span class="val" id="wi-val-budget">200.000 €</span>
-            </div>
-            <input type="range" id="wi-budget" min="100000" max="400000" step="10000" value="200000" />
-          </div>
-
-          <div class="form-group">
-            <div class="form-label">
-              <span>Ελάχιστα σήματα για «Έτοιμο» χωρίς VIP (Αρχικό: 4+)</span>
-              <span class="val" id="wi-val-signals">4+ σήματα</span>
-            </div>
-            <input type="range" id="wi-signals" min="2" max="7" step="1" value="4" />
-          </div>
-
-          <div class="form-group">
-            <div class="form-label">
-              <span>Ανώτατο όριο «Σε σκέψη» (Αρχικό: 180 μέρες)</span>
-              <span class="val" id="wi-val-think">180 μέρες</span>
-            </div>
-            <input type="range" id="wi-think" min="120" max="270" step="15" value="180" />
-          </div>
-
-          <button type="button" class="btn" id="btn-wi-reset">↩️ Επαναφορά στους αρχικούς κανόνες (60μ / 200k / 4+)</button>
         </div>
-
-        <div class="panel">
-          <h2>Σύγκριση: Αρχικοί Κανόνες vs Νέο Σενάριο</h2>
-          <div class="table-wrap" style="margin-bottom: 14px;">
-            <table>
-              <thead>
-                <tr><th>Segment</th><th>Αρχικό</th><th>Νέο</th><th>Διαφορά</th><th>Νέο Pipeline Budget</th></tr>
-              </thead>
-              <tbody id="whatif-tbody"></tbody>
-            </table>
-          </div>
-          <div id="whatif-insight" class="action-card"></div>
+        <div id="matcher-summary" style="font-size:13.5px; font-weight:600; margin-bottom:12px;"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Προτεραιότητα</th><th>Πελάτης</th><th>Περιοχή</th><th>Budget Πελάτη</th><th>Διαφορά Τιμής</th><th>Ενέργεια</th></tr>
+            </thead>
+            <tbody id="matcher-tbody"></tbody>
+          </table>
         </div>
       </div>
     </section>
 
     <!-- =================================================================== -->
-    <!-- TAB 5: EMAIL TEMPLATES PLAYBOOK                                     -->
+    <!-- TAB 4: EMAIL TEMPLATES                                              -->
     <!-- =================================================================== -->
     <section id="tab-emails" class="tab-panel">
       <div class="panel">
         <h2>✉️ Έτοιμα Email Templates ανά Segment (Copy–Paste)</h2>
-        <p style="font-size:13.5px; color:var(--muted); margin-top:0;">
-          Συμπλήρωσε δοκιμαστικά στοιχεία παρακάτω για να δεις τα emails εξατομικευμένα — ή άφησε τις μεταβλητές για το email εργαλείο σου (Mailchimp, Brevo, HubSpot).
-        </p>
         <div class="filters-row">
           <input type="text" id="tpl-name" class="input-text" value="Μαρία" placeholder="Όνομα πελάτη" />
           <input type="text" id="tpl-area" class="input-text" value="Γλυφάδα" placeholder="Περιοχή" />
@@ -623,32 +425,117 @@
     </section>
 
     <!-- =================================================================== -->
-    <!-- TAB 6: SQL / PYTHON PLAYGROUND & MINI QUIZ                          -->
+    <!-- TAB 5: WHAT-IF LAB                                                  -->
     <!-- =================================================================== -->
-    <section id="tab-code" class="tab-panel">
-      <div class="equal-col">
+    <section id="tab-whatif" class="tab-panel">
+      <div class="two-col">
         <div class="panel">
-          <div class="toolbar" style="margin-bottom:10px;">
-            <h2 style="margin:0;">🗄️ Η λογική σε SQL</h2>
-            <button type="button" class="btn" data-copy="code-sql">📋 Αντιγραφή SQL</button>
+          <h2>🧪 What-If Threshold Lab (Sensitivity Analysis)</h2>
+          <p style="font-size:13px; color:var(--muted); margin-top:0;">
+            Δοκίμασε αλλαγές στα όρια πάνω στους <strong><span id="whatif-n">150</span> πελάτες</strong> σου και δες τη διαφορά σε πραγματικό χρόνο.
+          </p>
+          <div class="form-group">
+            <div class="form-label"><span>Όριο ενεργού παραθύρου (Αρχικό: 60μ)</span><span class="val" id="wi-val-active">60 μέρες</span></div>
+            <input type="range" id="wi-active" min="30" max="120" step="5" value="60" />
           </div>
-          <pre class="code-block" id="code-sql">WITH inbound_activity AS (
-  SELECT
-    lead_id,
-    MAX(event_date) AS last_inbound_date,
-    COUNT(*)        AS signals_count,
-    MAX(CASE WHEN event_type = 'property_visit'
-             THEN 1 ELSE 0 END) AS has_visit
+          <div class="form-group">
+            <div class="form-label"><span>Όριο VIP Budget (Αρχικό: 200.000€)</span><span class="val" id="wi-val-budget">200.000 €</span></div>
+            <input type="range" id="wi-budget" min="100000" max="400000" step="10000" value="200000" />
+          </div>
+          <div class="form-group">
+            <div class="form-label"><span>Ελάχιστα σήματα χωρίς VIP (Αρχικό: 4+)</span><span class="val" id="wi-val-signals">4+ σήματα</span></div>
+            <input type="range" id="wi-signals" min="2" max="7" step="1" value="4" />
+          </div>
+          <div class="form-group">
+            <div class="form-label"><span>Ανώτατο όριο «Σε σκέψη» (Αρχικό: 180μ)</span><span class="val" id="wi-val-think">180 μέρες</span></div>
+            <input type="range" id="wi-think" min="120" max="270" step="15" value="180" />
+          </div>
+          <button type="button" class="btn" id="btn-wi-reset">↩️ Επαναφορά στους αρχικούς κανόνες</button>
+        </div>
+
+        <div class="panel">
+          <h2>Σύγκριση: Αρχικοί Κανόνες vs Νέο Σενάριο</h2>
+          <div class="table-wrap" style="margin-bottom: 12px;">
+            <table>
+              <thead><tr><th>Segment</th><th>Αρχικό</th><th>Νέο</th><th>Διαφορά</th><th>Νέο Pipeline</th></tr></thead>
+              <tbody id="whatif-tbody"></tbody>
+            </table>
+          </div>
+          <div id="whatif-insight" class="action-card"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 6: RULES, SIMULATOR & CODE                                      -->
+    <!-- =================================================================== -->
+    <section id="tab-rules" class="tab-panel">
+      <div class="cards-grid">
+        <article class="segment-card">
+          <div class="segment-banner theme-ready"><div class="segment-icon">🔥</div><div><h3 class="segment-title">Έτοιμος αγοραστής</h3><p class="segment-sub">έως 60 μέρες</p></div></div>
+          <p style="margin:0; font-size:13.5px;">Κινήθηκε τις τελευταίες 60 μέρες και έκανε επίσκεψη <strong>ή</strong> έδειξε 4+ σήματα, <strong>ή</strong> 2–3 σήματα με budget από 200.000€.</p>
+          <ul class="transitions"><li>↓ Σε σκέψη μετά από 60 μέρες χωρίς κίνηση</li></ul>
+        </article>
+        <article class="segment-card">
+          <div class="segment-banner theme-new"><div class="segment-icon">🌱</div><div><h3 class="segment-title">Νέος ενδιαφερόμενος</h3><p class="segment-sub">έως 60 μέρες</p></div></div>
+          <p style="margin:0; font-size:13.5px;">Κινήθηκε τις τελευταίες 60 μέρες, αλλά δεν πληροί ακόμα τα κριτήρια του Έτοιμου.</p>
+          <ul class="transitions"><li>↑ Έτοιμος με επίσκεψη, 4+ σήματα ή 2–3 σήματα &amp; budget ≥ 200k</li><li>↓ Σε σκέψη μετά από 60 μέρες χωρίς κίνηση</li></ul>
+        </article>
+        <article class="segment-card">
+          <div class="segment-banner theme-think"><div class="segment-icon">⌛</div><div><h3 class="segment-title">Σε σκέψη</h3><p class="segment-sub">61–180 μέρες</p></div></div>
+          <p style="margin:0; font-size:13.5px;">Δεν έχει κινηθεί για 2 έως 6 μήνες. Το σκέφτεται ακόμα.</p>
+          <ul class="transitions"><li>↑ Με νέα κίνηση γίνεται Νέος ή Έτοιμος · ↓ Σε ψύξη μετά τις 180 μέρες</li></ul>
+        </article>
+        <article class="segment-card">
+          <div class="segment-banner theme-cold"><div class="segment-icon">❄️</div><div><h3 class="segment-title">Σε ψύξη</h3><p class="segment-sub">181–365 μέρες</p></div></div>
+          <p style="margin:0; font-size:13.5px;">Δεν έχει κινηθεί για 6 έως 12 μήνες.</p>
+          <ul class="transitions"><li>↑ Με νέα κίνηση γίνεται Νέος ή Έτοιμος · ↓ Σε νάρκη μετά τις 365 μέρες</li></ul>
+        </article>
+        <article class="segment-card full-width">
+          <div class="segment-banner theme-dormant"><div class="segment-icon">🌙</div><div><h3 class="segment-title">Σε νάρκη</h3><p class="segment-sub">365+ μέρες</p></div></div>
+          <p style="margin:0; font-size:13.5px;">Δεν έχει κινηθεί για πάνω από έναν χρόνο. Μένει εδώ μόνιμα. ↑ Με νέα κίνηση γίνεται Νέος ή Έτοιμος.</p>
+        </article>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h2>🎛️ Segment Simulator</h2>
+          <div class="form-group">
+            <div class="form-label"><span>Ημέρες από τελευταία εισερχόμενη κίνηση</span><span class="val" id="val-days">22 μέρες</span></div>
+            <input type="range" id="sim-days" min="0" max="450" value="22" />
+          </div>
+          <div class="form-group">
+            <div class="form-label"><span>Πλήθος σημάτων / αιτημάτων</span><span class="val" id="val-signals">2 σήματα</span></div>
+            <input type="range" id="sim-signals" min="1" max="10" value="2" />
+          </div>
+          <div class="form-group">
+            <div class="form-label"><span>Δηλωμένο Budget</span><span class="val" id="val-budget">240.000 €</span></div>
+            <input type="range" id="sim-budget" min="50000" max="600000" step="10000" value="240000" />
+          </div>
+          <div class="form-group">
+            <div class="form-label"><span>Επίσκεψη σε ακίνητο;</span></div>
+            <div class="toggle-row">
+              <button type="button" class="toggle-btn active" id="btn-visit-no">Όχι</button>
+              <button type="button" class="toggle-btn" id="btn-visit-yes">Ναι (Επίσκεψη)</button>
+            </div>
+          </div>
+          <div id="sim-result" class="result-box"></div>
+        </div>
+
+        <div class="panel">
+          <h2>🗄️ Η λογική σε SQL (`WHERE direction = 'inbound'`)</h2>
+          <pre class="code-block">WITH inbound_activity AS (
+  SELECT lead_id, MAX(event_date) AS last_inbound_date,
+         COUNT(*) AS signals_count,
+         MAX(CASE WHEN event_type='property_visit' THEN 1 ELSE 0 END) AS has_visit
   FROM sample_interactions
-  WHERE direction = 'inbound' -- Αγνοούμε τα δικά μας!
+  WHERE direction = 'inbound' -- Αγνοούμε δικά μας follow-ups!
   GROUP BY lead_id
 )
-SELECT
-  l.lead_id, l.full_name, l.budget,
+SELECT l.lead_id, l.full_name, l.budget,
   CASE
     WHEN days_since_inbound &lt;= 60 AND (
-      has_visit = 1
-      OR signals_count &gt;= 4
+      has_visit = 1 OR signals_count &gt;= 4
       OR (signals_count BETWEEN 2 AND 3 AND budget &gt;= 200000)
     ) THEN 'Έτοιμος αγοραστής'
     WHEN days_since_inbound &lt;= 60  THEN 'Νέος ενδιαφερόμενος'
@@ -659,110 +546,190 @@ SELECT
 FROM sample_crm_leads l
 LEFT JOIN inbound_activity a ON l.lead_id = a.lead_id;</pre>
         </div>
-
-        <div class="panel">
-          <div class="toolbar" style="margin-bottom:10px;">
-            <h2 style="margin:0;">🐍 Η λογική σε Python</h2>
-            <button type="button" class="btn" data-copy="code-py">📋 Αντιγραφή Python</button>
-          </div>
-          <pre class="code-block" id="code-py">def classify_lead(days, signals, has_visit, budget):
-    if days &lt;= 60:
-        is_ready = (
-            has_visit
-            or signals &gt;= 4
-            or (2 &lt;= signals &lt;= 3 and budget &gt;= 200_000)
-        )
-        return "Έτοιμος αγοραστής" if is_ready else "Νέος ενδιαφερόμενος"
-
-    if days &lt;= 180:
-        return "Σε σκέψη"
-    if days &lt;= 365:
-        return "Σε ψύξη"
-    return "Σε νάρκη"</pre>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>🎯 Mini Quiz Data Analyst (3 ερωτήσεις)</h2>
-        <div id="quiz-container"></div>
       </div>
     </section>
 
+    <!-- PRINTABLE EXECUTIVE REPORT -->
+    <section id="print-report"></section>
+
     <footer>
-      Εκπαιδευτικό Case Study · Μάθημα Data Analyst — Προσαρμογή RFM στο Real Estate ·
+      Real Estate RFM Mini-CRM · 100% Client-Side ·
       <a href="https://github.com/karidasd/real-estate-rfm-segmentation" target="_blank" rel="noopener" style="color:inherit; font-weight:600;">GitHub Repo (SQL, Python &amp; Notebook)</a>
     </footer>
   </div>
 
+  <!-- MODAL 1: LEAD DETAIL CARD -->
+  <div class="modal-backdrop" id="modal-lead">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="ml-title">Καρτέλα Πελάτη</h3>
+        <button type="button" class="close-btn" data-close="modal-lead">×</button>
+      </div>
+      <div id="ml-body"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: ADD NEW LEAD -->
+  <div class="modal-backdrop" id="modal-new">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>➕ Προσθήκη Νέου Πελάτη</h3>
+        <button type="button" class="close-btn" data-close="modal-new">×</button>
+      </div>
+      <form id="form-new-lead">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Ονοματεπώνυμο *</label><input required id="nl-name" class="input-text" style="width:100%;" placeholder="π.χ. Ελένη Παππά" /></div>
+          <div class="form-group"><label class="form-label">Email *</label><input required type="email" id="nl-email" class="input-text" style="width:100%;" placeholder="eleni@example.gr" /></div>
+          <div class="form-group"><label class="form-label">Περιοχή</label><input id="nl-area" class="input-text" style="width:100%;" value="Γλυφάδα" /></div>
+          <div class="form-group"><label class="form-label">Πηγή</label>
+            <select id="nl-source" class="select-box" style="width:100%;">
+              <option>Spitogatos</option><option>Xe.gr</option><option>Website</option><option>Instagram Ads</option><option>Σύσταση</option><option>Τηλέφωνο</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Budget (€)</label><input type="number" id="nl-budget" class="input-text" style="width:100%;" value="220000" step="10000" /></div>
+          <div class="form-group"><label class="form-label">Αριθμός Σημάτων</label><input type="number" id="nl-signals" class="input-text" style="width:100%;" value="1" min="1" /></div>
+          <div class="form-group"><label class="form-label">Μέρες από τελευταία κίνηση</label><input type="number" id="nl-days" class="input-text" style="width:100%;" value="0" min="0" /></div>
+          <div class="form-group"><label class="form-label">Έκανε επίσκεψη;</label>
+            <select id="nl-visit" class="select-box" style="width:100%;"><option value="0">Όχι</option><option value="1">Ναι (Επίσκεψη)</option></select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Σημειώσεις</label><textarea id="nl-notes" placeholder="π.χ. Ψάχνει 3άρι με πάρκινγκ, 2ος+ όροφος..."></textarea></div>
+        <div class="btn-group" style="justify-content:flex-end;">
+          <button type="button" class="btn" data-close="modal-new">Ακύρωση</button>
+          <button type="submit" class="btn btn-primary">💾 Αποθήκευση Πελάτη</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 3: SMART CSV COLUMN MAPPER -->
+  <div class="modal-backdrop" id="modal-mapper">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>🔗 Αντιστοίχιση Στηλών CSV (Smart Mapper)</h3>
+        <button type="button" class="close-btn" data-close="modal-mapper">×</button>
+      </div>
+      <p style="font-size:13px; color:var(--muted); margin-top:0;">
+        Διάλεξε ποια στήλη του αρχείου σου αντιστοιχεί σε κάθε πεδίο. Αν έχεις <strong>Ημερομηνία τελευταίας επαφής</strong> αντί για ημέρες, οι μέρες θα υπολογιστούν αυτόματα!
+      </p>
+      <div id="mapper-fields" class="form-grid"></div>
+      <div class="btn-group" style="justify-content:flex-end; margin-top:16px;">
+        <button type="button" class="btn" data-close="modal-mapper">Ακύρωση</button>
+        <button type="button" class="btn btn-primary" id="btn-apply-mapper">✅ Εισαγωγή Πελατών</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
   <script>
     // =========================================================================
-    // Core RFM Rules (parameterized for both Default & What-If Lab)
+    // Constants, Storage & Core RFM Engine
     // =========================================================================
-    const DEFAULT_CFG = { activeDays: 60, vipBudget: 200000, minSignals: 4, thinkMaxDays: 180 };
+    const STORAGE_LEADS = 're_rfm_leads_v2';
+    const STORAGE_DONE  = 're_rfm_done_today_v2';
+    const DEFAULT_CFG   = { activeDays: 60, vipBudget: 200000, minSignals: 4, thinkMaxDays: 180 };
 
     const SEGMENTS_META = {
-      'Έτοιμος αγοραστής': {
-        icon: '🔥', theme: 'theme-ready', color: '#b8431b',
-        campaign: 'Προσωπική επικοινωνία, αποστολή 2–3 στοχευμένων ακινήτων ακριβώς στο budget και άμεση πρόταση για επίσκεψη/υπόδειξη.'
-      },
-      'Νέος ενδιαφερόμενος': {
-        icon: '🌱', theme: 'theme-new', color: '#1d6f42',
-        campaign: 'Welcome & qualification email: συλλογή κριτηρίων (περιοχή, budget, χρονοδιάγραμμα) και παρουσίαση επιλεγμένων ευκαιριών.'
-      },
-      'Σε σκέψη': {
-        icon: '⌛', theme: 'theme-think', color: '#9b6a08',
-        campaign: 'Nurturing campaign: νέα ακίνητα στην περιοχή ενδιαφέροντος, ενημέρωση τιμών αγοράς ή πτώσεις τιμών.'
-      },
-      'Σε ψύξη': {
-        icon: '❄️', theme: 'theme-cold', color: '#1f5e9e',
-        campaign: 'Re-engagement email («Ψάχνετε ακόμα στην περιοχή Χ;»): σύντομο ερωτηματολόγιο 1 κλικ για επανενεργοποίηση.'
-      },
-      'Σε νάρκη': {
-        icon: '🌙', theme: 'theme-dormant', color: '#4e5566',
-        campaign: 'Χαμηλής συχνότητας τριμηνιαίο market report ή έλεγχος διαγραφής/καθαρισμού λίστας για υγιή deliverability.'
-      }
+      'Έτοιμος αγοραστής':   { icon: '🔥', theme: 'theme-ready',   color: '#b8431b', order: 1 },
+      'Νέος ενδιαφερόμενος': { icon: '🌱', theme: 'theme-new',     color: '#1d6f42', order: 2 },
+      'Σε σκέψη':            { icon: '⌛', theme: 'theme-think',   color: '#9b6a08', order: 3 },
+      'Σε ψύξη':             { icon: '❄️', theme: 'theme-cold',    color: '#1f5e9e', order: 4 },
+      'Σε νάρκη':            { icon: '🌙', theme: 'theme-dormant', color: '#4e5566', order: 5 }
     };
     const SEGMENT_ORDER = Object.keys(SEGMENTS_META);
+
+    let allLeads = [];
+    let doneIds = new Set(JSON.parse(localStorage.getItem(STORAGE_DONE) || '[]'));
+    let pendingCsv = null;
+
+    function formatEur(n) { return new Intl.NumberFormat('el-GR').format(Math.round(n || 0)) + ' €'; }
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2400);
+    }
 
     function classifyLead(days, signals, hasVisit, budget, cfg = DEFAULT_CFG) {
       if (days <= cfg.activeDays) {
         const isReady = hasVisit || signals >= cfg.minSignals || (signals >= 2 && signals < cfg.minSignals && budget >= cfg.vipBudget);
         if (isReady) {
-          const reasons = [];
-          if (hasVisit) reasons.push('έκανε επίσκεψη');
-          if (signals >= cfg.minSignals) reasons.push(`${signals} σήματα (${cfg.minSignals}+)`);
-          if (signals >= 2 && signals < cfg.minSignals && budget >= cfg.vipBudget) {
-            reasons.push(`${signals} σήματα + budget ≥ ${formatEur(cfg.vipBudget)}`);
-          }
-          return {
-            segment: 'Έτοιμος αγοραστής',
-            reason: `Κίνηση ≤${cfg.activeDays} μέρες (${days}μ) & ${reasons.join(' + ')}`,
-            daysToDrop: cfg.activeDays - days,
-            nextDrop: 'Σε σκέψη',
-            atRisk: days >= Math.max(1, cfg.activeDays - 15)
-          };
+          return { segment: 'Έτοιμος αγοραστής', atRisk: days >= Math.max(1, cfg.activeDays - 15), daysToDrop: cfg.activeDays - days };
         }
-        return {
-          segment: 'Νέος ενδιαφερόμενος',
-          reason: `Κίνηση ≤${cfg.activeDays} μέρες (${days}μ), δεν πληροί ακόμα κριτήρια Έτοιμου`,
-          daysToDrop: cfg.activeDays - days,
-          nextDrop: 'Σε σκέψη',
-          atRisk: false
-        };
+        return { segment: 'Νέος ενδιαφερόμενος', atRisk: false, daysToDrop: cfg.activeDays - days };
       }
-      if (days <= cfg.thinkMaxDays) {
-        return { segment: 'Σε σκέψη', reason: `Αδράνεια ${cfg.activeDays + 1}–${cfg.thinkMaxDays} μέρες (${days}μ)`, daysToDrop: cfg.thinkMaxDays - days, nextDrop: 'Σε ψύξη', atRisk: false };
-      }
-      if (days <= 365) {
-        return { segment: 'Σε ψύξη', reason: `Αδράνεια ${cfg.thinkMaxDays + 1}–365 μέρες (${days}μ)`, daysToDrop: 365 - days, nextDrop: 'Σε νάρκη', atRisk: false };
-      }
-      return { segment: 'Σε νάρκη', reason: `Αδράνεια άνω του έτους (${days}μ) — μένει εδώ μόνιμα`, daysToDrop: null, nextDrop: null, atRisk: false };
+      if (days <= cfg.thinkMaxDays) return { segment: 'Σε σκέψη', atRisk: false, daysToDrop: cfg.thinkMaxDays - days };
+      if (days <= 365) return { segment: 'Σε ψύξη', atRisk: false, daysToDrop: 365 - days };
+      return { segment: 'Σε νάρκη', atRisk: false, daysToDrop: null };
     }
 
-    function formatEur(n) { return new Intl.NumberFormat('el-GR').format(Math.round(n)) + ' €'; }
+    function computePriority(lead) {
+      let score = 0, reason = '';
+      if (lead.at_risk) {
+        score = 92 + Math.min(8, Math.floor((lead.days_since_inbound - 45) / 2));
+        reason = `⚠️ Κίνδυνος υποβάθμισης: απομένουν ${Math.max(0, 60 - lead.days_since_inbound)} μέρες πριν πέσει «Σε σκέψη»`;
+      } else if (lead.segment === 'Έτοιμος αγοραστής') {
+        score = 72 + (lead.has_visit ? 10 : 0) + (lead.budget >= 250000 ? 10 : 0);
+        reason = lead.has_visit ? '🔥 Έκανε επίσκεψη σε ακίνητο — υψηλή πρόθεση αγοράς' : '🔥 Έτοιμος αγοραστής με ενεργά σήματα / υψηλό budget';
+      } else if (lead.segment === 'Νέος ενδιαφερόμενος' && lead.signals_count >= 2) {
+        score = 60 + Math.min(10, Math.floor(lead.budget / 30000));
+        reason = '🌱 Κοντά σε αναβάθμιση: χρειάζεται 1 επίσκεψη ή επιπλέον σήμα για να γίνει Έτοιμος';
+      } else if (lead.segment === 'Νέος ενδιαφερόμενος') {
+        score = 45;
+        reason = '🌱 Νέος ενδιαφερόμενος — ευκαιρία για welcome & qualification';
+      } else if (lead.segment === 'Σε σκέψη') {
+        score = 30;
+        reason = '⌛ Σε σκέψη — ιδανικός για nurturing με νέες ευκαιρίες';
+      } else {
+        score = 15;
+        reason = '❄️ Ανενεργός — re-engagement campaign';
+      }
+      return { score: Math.min(99, score), reason };
+    }
+
+    function enrichLead(raw, idx = 0) {
+      const days = Math.max(0, Number(raw.days_since_inbound ?? 0));
+      const signals = Math.max(0, Number(raw.signals_count ?? 1));
+      const hasVisit = ['1', 'true', 'yes', 'ναι'].includes(String(raw.has_visit ?? '0').toLowerCase());
+      const budget = Math.max(0, Number(String(raw.budget ?? 0).replace(/[^\d.]/g, '')) || 0);
+      const res = classifyLead(days, signals, hasVisit, budget);
+      const lead = {
+        lead_id: raw.lead_id || `LD-${String(idx + 1).padStart(4, '0')}`,
+        full_name: raw.full_name || 'Πελάτης',
+        email: raw.email || '',
+        area: raw.area || '—',
+        source: raw.source || 'Direct',
+        budget, signals_count: signals, has_visit: hasVisit, days_since_inbound: days,
+        notes: raw.notes || '',
+        segment: res.segment, at_risk: res.atRisk
+      };
+      const pr = computePriority(lead);
+      lead.priority = pr.score;
+      lead.priority_reason = pr.reason;
+      return lead;
+    }
+
+    function saveLeads() {
+      localStorage.setItem(STORAGE_LEADS, JSON.stringify(allLeads));
+    }
+
+    function buildMailto(lead, customSubject, customBody) {
+      const first = lead.full_name.split(' ')[0];
+      const subject = customSubject || (lead.at_risk
+        ? `${first}, νέα ευκαιρία στην περιοχή ${lead.area}`
+        : `Επιλεγμένα ακίνητα σε ${lead.area} (${formatEur(lead.budget)})`);
+      const body = customBody || `Καλησπέρα ${first},\n\nΕπικοινωνώ σχετικά με την αναζήτησή σας στην περιοχή ${lead.area} (budget ~${formatEur(lead.budget)}). Έχουμε νέες προτάσεις που ταιριάζουν στα κριτήριά σας — θα θέλατε να σας τις στείλω;\n\nΜε εκτίμηση`;
+      return `mailto:${encodeURIComponent(lead.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    function buildWhatsApp(lead, customText) {
+      const first = lead.full_name.split(' ')[0];
+      const text = customText || `Καλησπέρα ${first}! Επικοινωνώ σχετικά με την αναζήτησή σας στην περιοχή ${lead.area} (${formatEur(lead.budget)}). Έχουμε μια νέα πρόταση που αξίζει να δείτε — να σας στείλω λεπτομέρειες;`;
+      return `https://wa.me/?text=${encodeURIComponent(text)}`;
+    }
 
     // =========================================================================
-    // Tabs
+    // Tabs & Modals
     // =========================================================================
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -773,106 +740,99 @@ LEFT JOIN inbound_activity a ON l.lead_id = a.lead_id;</pre>
       });
     });
 
-    // =========================================================================
-    // Tab 2: Simulator
-    // =========================================================================
-    const simDays = document.getElementById('sim-days');
-    const simSignals = document.getElementById('sim-signals');
-    const simBudget = document.getElementById('sim-budget');
-    const btnVisitNo = document.getElementById('btn-visit-no');
-    const btnVisitYes = document.getElementById('btn-visit-yes');
-    let simHasVisit = false;
-
-    function updateSimulator() {
-      const d = Number(simDays.value), s = Number(simSignals.value), b = Number(simBudget.value);
-      document.getElementById('val-days').textContent = `${d} μέρες`;
-      document.getElementById('val-signals').textContent = `${s} ${s === 1 ? 'σήμα' : 'σήματα'}`;
-      document.getElementById('val-budget').textContent = formatEur(b);
-
-      const res = classifyLead(d, s, simHasVisit, b);
-      const meta = SEGMENTS_META[res.segment];
-      const dropText = res.daysToDrop !== null
-        ? `Υποβάθμιση σε «${res.nextDrop}» σε <strong>${res.daysToDrop} μέρες</strong> αν δεν υπάρξει νέα εισερχόμενη κίνηση.`
-        : 'Παραμένει μόνιμα σε αυτό το στάδιο μέχρι να κάνει νέα κίνηση.';
-      const alertHtml = res.atRisk
-        ? `<div class="alert-banner">⚠️ Alert 45–60 ημερών: Απομένουν μόνο ${res.daysToDrop} μέρες πριν ο «Έτοιμος αγοραστής» πέσει «Σε σκέψη»!</div>`
-        : '';
-
-      document.getElementById('sim-result').className = `result-box ${meta.theme}`;
-      document.getElementById('sim-result').innerHTML = `
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-          <div class="segment-icon">${meta.icon}</div>
-          <div>
-            <div style="font-size:12px; color:#5f687a; font-weight:600;">ΚΑΤΗΓΟΡΙΑ ΠΕΛΑΤΗ</div>
-            <div class="segment-title" style="font-size:20px;">${res.segment}</div>
-          </div>
-        </div>
-        <p style="margin:0 0 8px; font-size:14px;"><strong>Κανόνας:</strong> ${res.reason}</p>
-        <p style="margin:0; font-size:13.5px; color:#334155;">${dropText}</p>
-        ${alertHtml}`;
-      document.getElementById('sim-action').innerHTML = `
-        <h4>✉️ Προτεινόμενη Email Campaign Ενέργεια</h4>
-        <p style="margin:0; color:#475569;">${meta.campaign}</p>`;
-    }
-
-    [simDays, simSignals, simBudget].forEach(el => el.addEventListener('input', updateSimulator));
-    btnVisitNo.addEventListener('click', () => { simHasVisit = false; btnVisitNo.classList.add('active'); btnVisitYes.classList.remove('active'); updateSimulator(); });
-    btnVisitYes.addEventListener('click', () => { simHasVisit = true; btnVisitYes.classList.add('active'); btnVisitNo.classList.remove('active'); updateSimulator(); });
-    document.querySelectorAll('.preset-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const p = btn.dataset.preset;
-        if (p === 'vip')    { simDays.value = 18;  simSignals.value = 2; simBudget.value = 250000; simHasVisit = false; }
-        if (p === 'atrisk') { simDays.value = 55;  simSignals.value = 4; simBudget.value = 220000; simHasVisit = true;  }
-        if (p === 'new')    { simDays.value = 12;  simSignals.value = 2; simBudget.value = 150000; simHasVisit = false; }
-        if (p === 'think')  { simDays.value = 110; simSignals.value = 3; simBudget.value = 210000; simHasVisit = false; }
-        if (p === 'cold')   { simDays.value = 240; simSignals.value = 1; simBudget.value = 180000; simHasVisit = false; }
-        btnVisitYes.classList.toggle('active', simHasVisit);
-        btnVisitNo.classList.toggle('active', !simHasVisit);
-        updateSimulator();
-      });
+    document.querySelectorAll('[data-close]').forEach(btn => {
+      btn.addEventListener('click', () => document.getElementById(btn.dataset.close).classList.remove('open'));
     });
-    updateSimulator();
+    document.querySelectorAll('.modal-backdrop').forEach(bg => {
+      bg.addEventListener('click', e => { if (e.target === bg) bg.classList.remove('open'); });
+    });
 
     // =========================================================================
-    // Tab 3 & Tab 4: CSV Analyzer, Attribution & What-If Lab
+    // Render All Views
     // =========================================================================
-    let allLeads = [];
-
-    function parseCSV(text) {
-      const clean = text.replace(/^\uFEFF/, '').trim();
-      const lines = clean.split(/\r?\n/);
-      if (lines.length < 2) return [];
-      const delim = (lines[0].split(';').length > lines[0].split(',').length) ? ';' : ',';
-      const headers = lines[0].split(delim).map(h => h.replace(/^"|"$/g, '').trim());
-      return lines.slice(1).filter(Boolean).map(line => {
-        const cols = line.split(delim).map(c => c.replace(/^"|"$/g, '').trim());
-        const obj = {};
-        headers.forEach((h, i) => { obj[h] = cols[i] ?? ''; });
-        return obj;
-      });
-    }
-
-    function processRows(rawRows) {
-      allLeads = rawRows.map((r, i) => {
-        const days = Number(r.days_since_inbound ?? 0);
-        const signals = Number(r.signals_count ?? 1);
-        const hasVisit = ['1', 'true', 'yes', 'ναι'].includes(String(r.has_visit ?? '0').toLowerCase());
-        const budget = Number(r.budget ?? 0);
-        const res = classifyLead(days, signals, hasVisit, budget);
-        return {
-          lead_id: r.lead_id || `LD-${String(i + 1).padStart(4, '0')}`,
-          full_name: r.full_name || 'Πελάτης',
-          email: r.email || '',
-          area: r.area || '—',
-          source: r.source || 'Direct',
-          budget, signals_count: signals, has_visit: hasVisit, days_since_inbound: days,
-          segment: res.segment, at_risk: res.atRisk
-        };
-      });
-      renderAnalyzer();
+    function renderAll() {
+      renderToday();
+      renderCRM();
+      populateMatcherAreas();
+      renderMatcher();
       renderWhatIf();
     }
 
+    // --- TAB 1: TODAY ACTION QUEUE ---
+    function renderToday() {
+      const ready = allLeads.filter(l => l.segment === 'Έτοιμος αγοραστής');
+      const alerts = allLeads.filter(l => l.at_risk);
+      const almost = allLeads.filter(l => l.segment === 'Νέος ενδιαφερόμενος' && l.signals_count >= 2);
+      const readyBudget = ready.reduce((s, l) => s + l.budget, 0);
+
+      document.getElementById('t-kpi-alert').textContent = alerts.length;
+      document.getElementById('t-kpi-ready').textContent = ready.length;
+      document.getElementById('t-kpi-budget').textContent = `Pipeline: ${formatEur(readyBudget)}`;
+      document.getElementById('t-kpi-almost').textContent = almost.length;
+      document.getElementById('t-kpi-done').textContent = doneIds.size;
+
+      const mode = document.getElementById('today-filter').value;
+      let list = [...allLeads];
+      if (mode === 'ALERT') list = list.filter(l => l.at_risk);
+      else if (mode === 'VIP') list = list.filter(l => l.segment === 'Έτοιμος αγοραστής' && l.budget >= 250000);
+      else if (mode === 'ALMOST') list = list.filter(l => l.segment === 'Νέος ενδιαφερόμενος' && l.signals_count >= 2);
+
+      list.sort((a, b) => (doneIds.has(a.lead_id) - doneIds.has(b.lead_id)) || (b.priority - a.priority) || (b.budget - a.budget));
+      if (mode === 'TOP') list = list.slice(0, 15);
+
+      const box = document.getElementById('today-queue');
+      if (!list.length) {
+        box.innerHTML = '<p style="color:var(--muted); text-align:center; padding:24px;">Δεν υπάρχουν πελάτες σε αυτή την κατηγορία προτεραιότητας.</p>';
+        return;
+      }
+      box.innerHTML = list.map(l => {
+        const meta = SEGMENTS_META[l.segment];
+        const isDone = doneIds.has(l.lead_id);
+        const dotBg = l.at_risk ? '#fff7ed' : meta.theme === 'theme-ready' ? '#fceae3' : '#e7f6ec';
+        const dotColor = l.at_risk ? '#c2410c' : meta.color;
+        return `
+          <div class="queue-item ${isDone ? 'done' : ''}">
+            <div class="queue-left">
+              <div class="priority-dot" style="background:${dotBg}; color:${dotColor};" title="Priority Score">
+                <span>${l.priority}</span>
+                <span style="font-size:9px; font-weight:600;">SCORE</span>
+              </div>
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <strong>${l.full_name}</strong>
+                  <span class="badge ${meta.theme}" style="color:${meta.color};">${meta.icon} ${l.segment}</span>
+                  ${isDone ? '<span class="badge badge-done">✅ Επικοινώνησα</span>' : ''}
+                </div>
+                <div class="queue-meta">📍 ${l.area} · 💰 ${formatEur(l.budget)} · 📩 ${l.signals_count} σήματα · ⏱️ ${l.days_since_inbound} μέρες</div>
+                <div class="queue-reason">${l.priority_reason}</div>
+              </div>
+            </div>
+            <div class="btn-group">
+              <a class="btn btn-sm" href="${buildMailto(l)}">✉️ Email</a>
+              <a class="btn btn-sm" href="${buildWhatsApp(l)}" target="_blank" rel="noopener">💬 WhatsApp</a>
+              <button type="button" class="btn btn-sm" data-open-lead="${l.lead_id}">📝 Καρτέλα</button>
+              <button type="button" class="btn btn-sm ${isDone ? '' : 'btn-green'}" data-toggle-done="${l.lead_id}">
+                ${isDone ? '↩️ Αναίρεση' : '✅ Έγινε'}
+              </button>
+            </div>
+          </div>`;
+      }).join('');
+
+      box.querySelectorAll('[data-open-lead]').forEach(b => b.addEventListener('click', () => openLeadModal(b.dataset.openLead)));
+      box.querySelectorAll('[data-toggle-done]').forEach(b => b.addEventListener('click', () => {
+        const id = b.dataset.toggleDone;
+        if (doneIds.has(id)) doneIds.delete(id); else doneIds.add(id);
+        localStorage.setItem(STORAGE_DONE, JSON.stringify([...doneIds]));
+        renderToday();
+      }));
+    }
+
+    document.getElementById('today-filter').addEventListener('change', renderToday);
+    document.getElementById('btn-reset-done').addEventListener('click', () => {
+      doneIds.clear(); localStorage.setItem(STORAGE_DONE, '[]'); renderToday(); showToast('Η λίστα ολοκληρωμένων καθαρίστηκε.');
+    });
+
+    // --- TAB 2: CRM DATABASE & CHARTS ---
     function getFilteredLeads() {
       const q = document.getElementById('filter-search').value.trim().toLowerCase();
       const seg = document.getElementById('filter-segment').value;
@@ -885,17 +845,9 @@ LEFT JOIN inbound_activity a ON l.lead_id = a.lead_id;</pre>
       });
     }
 
-    function renderAnalyzer() {
+    function renderCRM() {
       const total = allLeads.length;
       const readyLeads = allLeads.filter(l => l.segment === 'Έτοιμος αγοραστής');
-      const readyBudget = readyLeads.reduce((s, l) => s + l.budget, 0);
-      const alertCount = allLeads.filter(l => l.at_risk).length;
-
-      document.getElementById('kpi-total').textContent = total;
-      document.getElementById('kpi-ready').textContent = readyLeads.length;
-      document.getElementById('kpi-ready-pct').textContent = total ? `${((readyLeads.length / total) * 100).toFixed(1)}% της βάσης` : '—';
-      document.getElementById('kpi-budget').textContent = formatEur(readyBudget);
-      document.getElementById('kpi-alert').textContent = alertCount;
 
       const chartEl = document.getElementById('chart-container');
       chartEl.innerHTML = SEGMENT_ORDER.map(seg => {
@@ -903,47 +855,41 @@ LEFT JOIN inbound_activity a ON l.lead_id = a.lead_id;</pre>
         const pct = total ? (list.length / total) * 100 : 0;
         const meta = SEGMENTS_META[seg];
         return `
-          <div class="bar-row" data-seg="${seg}" title="Κλικ για φιλτράρισμα σε: ${seg}">
+          <div class="bar-row" data-seg="${seg}">
             <div style="font-size:13px; font-weight:600;">${meta.icon} ${seg}</div>
             <div class="bar-track"><div class="bar-fill" style="width:${pct.toFixed(1)}%; background:${meta.color};"></div></div>
             <div class="bar-meta">${list.length} (${pct.toFixed(1)}%)</div>
           </div>`;
       }).join('');
+      chartEl.querySelectorAll('.bar-row').forEach(r => r.addEventListener('click', () => {
+        document.getElementById('filter-segment').value = r.dataset.seg; renderTable();
+      }));
 
-      chartEl.querySelectorAll('.bar-row').forEach(row => {
-        row.addEventListener('click', () => {
-          document.getElementById('filter-segment').value = row.dataset.seg;
-          renderTable();
-        });
-      });
-
-      // Top Areas (Ready Buyers)
+      // Top Areas
       const areaMap = {};
       readyLeads.forEach(l => { areaMap[l.area] = (areaMap[l.area] || 0) + 1; });
       const topAreas = Object.entries(areaMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
-      const maxArea = topAreas[0]?.[1] || 1;
-      document.getElementById('area-chart').innerHTML = topAreas.map(([area, cnt]) => `
-        <div style="display:grid; grid-template-columns:125px 1fr 42px; align-items:center; gap:8px; margin-bottom:7px; font-size:12.5px;">
-          <span style="font-weight:600;">${area}</span>
-          <div class="bar-track"><div class="bar-fill" style="width:${(cnt / maxArea * 100).toFixed(0)}%; background:#b8431b;"></div></div>
-          <span style="text-align:right; color:#5f687a; font-weight:600;">${cnt}</span>
-        </div>`).join('') || '<p style="font-size:12.5px; color:#64748b;">—</p>';
+      const maxA = topAreas[0]?.[1] || 1;
+      document.getElementById('area-chart').innerHTML = topAreas.map(([a, c]) => `
+        <div style="display:grid; grid-template-columns:125px 1fr 38px; align-items:center; gap:8px; margin-bottom:6px; font-size:12.5px;">
+          <span style="font-weight:600;">${a}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${(c / maxA * 100).toFixed(0)}%; background:#b8431b;"></div></div>
+          <span style="text-align:right; color:#5d6678; font-weight:600;">${c}</span>
+        </div>`).join('') || '—';
 
-      // Channel Attribution (% Ready per Source)
+      // Sources
       const srcMap = {};
       allLeads.forEach(l => {
         if (!srcMap[l.source]) srcMap[l.source] = { total: 0, ready: 0 };
-        srcMap[l.source].total += 1;
-        if (l.segment === 'Έτοιμος αγοραστής') srcMap[l.source].ready += 1;
+        srcMap[l.source].total++;
+        if (l.segment === 'Έτοιμος αγοραστής') srcMap[l.source].ready++;
       });
-      const sources = Object.entries(srcMap)
-        .map(([src, d]) => ({ src, rate: d.total ? (d.ready / d.total) * 100 : 0, ready: d.ready, total: d.total }))
-        .sort((a, b) => b.rate - a.rate).slice(0, 5);
-      document.getElementById('source-chart').innerHTML = sources.map(s => `
-        <div style="display:grid; grid-template-columns:115px 1fr 78px; align-items:center; gap:8px; margin-bottom:7px; font-size:12.5px;">
-          <span style="font-weight:600;">${s.src}</span>
-          <div class="bar-track"><div class="bar-fill" style="width:${s.rate.toFixed(0)}%; background:#1d6f42;"></div></div>
-          <span style="text-align:right; color:#5f687a; font-weight:600;">${s.rate.toFixed(0)}% (${s.ready}/${s.total})</span>
+      const sources = Object.entries(srcMap).map(([s, d]) => ({ s, rate: d.total ? d.ready / d.total * 100 : 0, r: d.ready, t: d.total })).sort((a, b) => b.rate - a.rate).slice(0, 5);
+      document.getElementById('source-chart').innerHTML = sources.map(x => `
+        <div style="display:grid; grid-template-columns:115px 1fr 78px; align-items:center; gap:8px; margin-bottom:6px; font-size:12.5px;">
+          <span style="font-weight:600;">${x.s}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${x.rate.toFixed(0)}%; background:#1d6f42;"></div></div>
+          <span style="text-align:right; color:#5d6678; font-weight:600;">${x.rate.toFixed(0)}% (${x.r}/${x.t})</span>
         </div>`).join('');
 
       renderTable();
@@ -956,12 +902,12 @@ LEFT JOIN inbound_activity a ON l.lead_id = a.lead_id;</pre>
         tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; color:#64748b; padding:24px;">Δεν βρέθηκαν πελάτες με αυτά τα φίλτρα.</td></tr>';
         return;
       }
-      tbody.innerHTML = filtered.slice(0, 200).map(l => {
+      tbody.innerHTML = filtered.slice(0, 250).map(l => {
         const meta = SEGMENTS_META[l.segment];
         return `
-          <tr>
+          <tr class="clickable" data-row-id="${l.lead_id}">
             <td><strong>${l.lead_id}</strong></td>
-            <td>${l.full_name}<br><span style="font-size:11.5px; color:#64748b;">${l.email}</span></td>
+            <td>${l.full_name} ${l.notes ? '📝' : ''}<br><span style="font-size:11.5px; color:#64748b;">${l.email}</span></td>
             <td>${l.area}</td>
             <td>${l.source}</td>
             <td>${formatEur(l.budget)}</td>
@@ -972,178 +918,332 @@ LEFT JOIN inbound_activity a ON l.lead_id = a.lead_id;</pre>
             <td>${l.at_risk ? '<span class="badge badge-alert">⚠️ 45–60μ</span>' : '—'}</td>
           </tr>`;
       }).join('');
+      tbody.querySelectorAll('tr.clickable').forEach(tr => tr.addEventListener('click', () => openLeadModal(tr.dataset.rowId)));
     }
 
-    // What-If Lab
-    const wiActive = document.getElementById('wi-active');
-    const wiBudget = document.getElementById('wi-budget');
-    const wiSignals = document.getElementById('wi-signals');
-    const wiThink = document.getElementById('wi-think');
-
-    function renderWhatIf() {
-      const cfg = {
-        activeDays: Number(wiActive.value),
-        vipBudget: Number(wiBudget.value),
-        minSignals: Number(wiSignals.value),
-        thinkMaxDays: Number(wiThink.value)
-      };
-      document.getElementById('wi-val-active').textContent = `${cfg.activeDays} μέρες`;
-      document.getElementById('wi-val-budget').textContent = formatEur(cfg.vipBudget);
-      document.getElementById('wi-val-signals').textContent = `${cfg.minSignals}+ σήματα`;
-      document.getElementById('wi-val-think').textContent = `${cfg.thinkMaxDays} μέρες`;
-      document.getElementById('whatif-n').textContent = allLeads.length;
-
-      const baseCounts = {}, newCounts = {}, newBudgets = {};
-      SEGMENT_ORDER.forEach(s => { baseCounts[s] = 0; newCounts[s] = 0; newBudgets[s] = 0; });
-
-      allLeads.forEach(l => {
-        baseCounts[l.segment] += 1;
-        const nSeg = classifyLead(l.days_since_inbound, l.signals_count, l.has_visit, l.budget, cfg).segment;
-        newCounts[nSeg] += 1;
-        newBudgets[nSeg] += l.budget;
-      });
-
-      document.getElementById('whatif-tbody').innerHTML = SEGMENT_ORDER.map(seg => {
-        const diff = newCounts[seg] - baseCounts[seg];
-        const diffClass = diff > 0 ? 'delta-pos' : diff < 0 ? 'delta-neg' : 'delta-zero';
-        const diffStr = diff > 0 ? `+${diff}` : `${diff}`;
-        return `
-          <tr>
-            <td><strong>${SEGMENTS_META[seg].icon} ${seg}</strong></td>
-            <td>${baseCounts[seg]}</td>
-            <td><strong>${newCounts[seg]}</strong></td>
-            <td class="${diffClass}">${diffStr}</td>
-            <td>${formatEur(newBudgets[seg])}</td>
-          </tr>`;
-      }).join('');
-
-      const readyDiff = newCounts['Έτοιμος αγοραστής'] - baseCounts['Έτοιμος αγοραστής'];
-      document.getElementById('whatif-insight').innerHTML = `
-        <h4>💡 Data Analyst Insight</h4>
-        <p style="margin:0; color:#475569;">
-          Με αυτά τα όρια, οι <strong>«Έτοιμοι αγοραστές»</strong> αλλάζουν κατά <strong>${readyDiff >= 0 ? '+' + readyDiff : readyDiff} πελάτες</strong>
-          (νέο σύνολο: <strong>${newCounts['Έτοιμος αγοραστής']}</strong>, pipeline <strong>${formatEur(newBudgets['Έτοιμος αγοραστής'])}</strong>).
-          ${readyDiff > 8 ? 'Προσοχή: Ίσως γίνει πολύ ευρύ το segment για προσωπικό follow-up από τους συμβούλους.' :
-            readyDiff < -8 ? 'Πιο αυστηρά κριτήρια: λιγότεροι πελάτες, αλλά υψηλότερης εστίασης για την ομάδα πωλήσεων.' :
-            'Ισορροπημένη μεταβολή — καλή βάση για A/B test στις επόμενες καμπάνιες.'}
-        </p>`;
-    }
-
-    [wiActive, wiBudget, wiSignals, wiThink].forEach(el => el.addEventListener('input', renderWhatIf));
-    document.getElementById('btn-wi-reset').addEventListener('click', () => {
-      wiActive.value = 60; wiBudget.value = 200000; wiSignals.value = 4; wiThink.value = 180;
-      renderWhatIf();
-    });
-
-    // Fallback generator + auto-load
-    function generateFallbackLeads() {
-      const names = ['Γιώργος Παπαδόπουλος','Μαρία Γεωργίου','Νίκος Νικολάου','Ελένη Δημητρίου','Κώστας Οικονόμου','Κατερίνα Βασιλείου','Δημήτρης Αντωνίου','Σοφία Πετρίδη','Παναγιώτης Μακρής','Άννα Σταματίου'];
-      const areas = ['Γλυφάδα','Κηφισιά','Χαλάνδρι','Παλαιό Φάληρο','Νέα Σμύρνη','Μαρούσι','Παγκράτι','Άλιμος'];
-      const sources = ['Spitogatos','Xe.gr','Website','Instagram Ads','Σύσταση','Τηλέφωνο'];
-      const rows = [];
-      for (let i = 1; i <= 150; i++) {
-        const bucket = i % 5;
-        let days, signals, visit, budget;
-        if (bucket === 0) { days = (i * 7) % 58 + 1; signals = 3 + (i % 4); visit = i % 2; budget = 200000 + (i % 5) * 45000; }
-        else if (bucket === 1) { days = (i * 5) % 55 + 1; signals = 1 + (i % 2); visit = 0; budget = 110000 + (i % 4) * 20000; }
-        else if (bucket === 2) { days = 65 + (i * 11) % 110; signals = 1 + (i % 4); visit = 0; budget = 150000 + (i % 5) * 35000; }
-        else if (bucket === 3) { days = 185 + (i * 13) % 170; signals = 1 + (i % 3); visit = 0; budget = 140000 + (i % 4) * 30000; }
-        else { days = 370 + (i * 17) % 220; signals = 1 + (i % 2); visit = 0; budget = 120000 + (i % 4) * 30000; }
-        rows.push({
-          lead_id: `LD-${String(i).padStart(4, '0')}`,
-          full_name: names[i % names.length],
-          email: `client${String(i).padStart(3, '0')}@example-realestate.gr`,
-          area: areas[i % areas.length], source: sources[i % sources.length],
-          budget, signals_count: signals, has_visit: visit, days_since_inbound: days
-        });
-      }
-      return rows;
-    }
-
-    async function loadSampleData() {
-      try {
-        const resp = await fetch('./data/sample_crm_leads.csv');
-        if (!resp.ok) throw new Error('HTTP');
-        processRows(parseCSV(await resp.text()));
-      } catch {
-        processRows(generateFallbackLeads());
-      }
-    }
-
-    document.getElementById('btn-load-sample').addEventListener('click', loadSampleData);
-    document.getElementById('csv-file-input').addEventListener('change', e => {
-      const file = e.target.files[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => processRows(parseCSV(ev.target.result));
-      reader.readAsText(file, 'UTF-8');
-    });
-    document.getElementById('btn-download-template').addEventListener('click', () => {
-      const tpl = '\uFEFFlead_id,full_name,email,area,source,budget,signals_count,has_visit,days_since_inbound\n' +
-        'LD-0001,Μαρία Παπαδοπούλου,maria@example.gr,Γλυφάδα,Spitogatos,260000,3,0,18\n' +
-        'LD-0002,Νίκος Γεωργίου,nikos@example.gr,Χαλάνδρι,Website,160000,2,0,25\n' +
-        'LD-0003,Ελένη Κωνσταντίνου,eleni@example.gr,Κηφισιά,Σύσταση,340000,4,1,52\n';
-      downloadBlob(tpl, 'crm_leads_template.csv');
-    });
-    document.getElementById('btn-copy-emails').addEventListener('click', () => {
-      const emails = getFilteredLeads().map(l => l.email).filter(Boolean).join(', ');
-      if (!emails) return;
-      navigator.clipboard?.writeText(emails);
-      alert(`Αντιγράφηκαν ${getFilteredLeads().length} emails στο πρόχειρο!`);
-    });
-    document.getElementById('btn-export-csv').addEventListener('click', () => {
-      const filtered = getFilteredLeads();
-      if (!filtered.length) return;
-      const header = 'lead_id,full_name,email,area,source,budget,signals_count,has_visit,days_since_inbound,segment,at_risk_60d\n';
-      const body = filtered.map(l =>
-        [l.lead_id, l.full_name, l.email, l.area, l.source, l.budget, l.signals_count, l.has_visit ? 1 : 0, l.days_since_inbound, l.segment, l.at_risk ? 'ΝΑΙ' : 'ΟΧΙ']
-          .map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')
-      ).join('\n');
-      const seg = document.getElementById('filter-segment').value;
-      downloadBlob('\uFEFF' + header + body, seg === 'ALL' ? 'crm_all_segments.csv' : `campaign_${seg.replace(/\s+/g, '_')}.csv`);
-    });
-    function downloadBlob(content, filename) {
-      const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; a.click();
-      URL.revokeObjectURL(a.href);
-    }
     ['filter-search', 'filter-segment', 'filter-alert'].forEach(id =>
       document.getElementById(id).addEventListener(id === 'filter-search' ? 'input' : 'change', renderTable)
     );
 
-    // =========================================================================
-    // Tab 5: Email Templates
-    // =========================================================================
-    const EMAIL_TEMPLATES = [
-      {
-        title: '🔥 Έτοιμος αγοραστής — Προσωπική Πρόταση Υπόδειξης',
-        theme: 'theme-ready',
-        subject: '3 νέα ακίνητα σε {{AREA}} ακριβώς στο budget σας ({{BUDGET}})',
-        body: 'Καλησπέρα {{NAME}},\n\nΕίδαμε το ενδιαφέρον σας για την περιοχή {{AREA}} και ξεχωρίσαμε 3 ακίνητα που ταιριάζουν ακριβώς στα κριτήριά σας (έως {{BUDGET}}) — το ένα μάλιστα δεν έχει δημοσιευτεί ακόμα στα portals.\n\nΘα σας βόλευε μια σύντομη επίσκεψη αυτή την εβδομάδα (Πέμπτη ή Παρασκευή απόγευμα);\n\nΜε εκτίμηση,\nΗ ομάδα μας'
-      },
-      {
-        title: '⚠️ Alert 45–60 ημερών — Πριν πέσει «Σε σκέψη»',
-        theme: 'theme-ready',
-        subject: '{{NAME}}, προλάβαμε μια νέα ευκαιρία σε {{AREA}}',
-        body: 'Καλησπέρα {{NAME}},\n\nΠέρασε λίγος καιρός από την τελευταία μας επικοινωνία και ήθελα απλώς να ελέγξω αν συνεχίζετε την αναζήτηση στην περιοχή {{AREA}}.\n\nΜόλις μπήκε ένα ακίνητο κοντά στα {{BUDGET}} με πολύ καλή σχέση τιμής/τετραγωνικών. Να σας στείλω τις φωτογραφίες και την κάτοψη;\n\nΚαλή συνέχεια!'
-      },
-      {
-        title: '🌱 Νέος ενδιαφερόμενος — Welcome & Qualification',
-        theme: 'theme-new',
-        subject: 'Καλώς ήρθατε! Πώς μπορούμε να βρούμε το ιδανικό ακίνητο σε {{AREA}}',
-        body: 'Καλησπέρα {{NAME}},\n\nΕυχαριστούμε για το μήνυμά σας! Για να μη σας στέλνουμε άσχετες αγγελίες, απαντήστε μας απλώς σε 2 γρήγορες ερωτήσεις:\n1. Ποιο είναι το ιδανικό σας χρονοδιάγραμμα αγοράς;\n2. Υπάρχει κάποιο απαραίτητο χαρακτηριστικό (π.χ. πάρκινγκ, όροφος, ανακαινισμένο);\n\nΈτσι θα σας στέλνουμε μόνο ό,τι πραγματικά αξίζει να δείτε.'
-      },
-      {
-        title: '⌛ Σε σκέψη (61–180 μέρες) — Nurturing & Price Drops',
-        theme: 'theme-think',
-        subject: 'Τι άλλαξε στις τιμές σε {{AREA}} τους τελευταίους 2 μήνες',
-        body: 'Καλησπέρα {{NAME}},\n\nΞέρουμε ότι η αγορά ακινήτου θέλει τον χρόνο της. Συγκεντρώσαμε 2 πρόσφατες μειώσεις τιμών σε {{AREA}} κοντά στα {{BUDGET}}, καθώς και μια σύντομη εικόνα της αγοράς αυτού του μήνα.\n\nΑν θέλετε να δείτε κάποιο από κοντά ή να αλλάξουμε κριτήρια αναζήτησης, είμαστε στη διάθεσή σας.'
-      },
-      {
-        title: '❄️ Σε ψύξη (181–365 μέρες) — Re-engagement 1 κλικ',
-        theme: 'theme-cold',
-        subject: 'Ψάχνετε ακόμα ακίνητο στην περιοχή {{AREA}}, {{NAME}};',
-        body: 'Καλησπέρα {{NAME}},\n\nΚάνουμε μια μικρή ενημέρωση στη λίστα μας για να μη σας ενοχλούμε άσκοπα. Απαντήστε μας απλώς με έναν αριθμό:\n1️⃣ Συνεχίζω την αναζήτηση σε {{AREA}}\n2️⃣ Έχω αλλάξει περιοχή ή budget\n3️⃣ Βρήκα ακίνητο / δεν ενδιαφέρομαι πλέον\n\nΕυχαριστούμε πολύ!'
+    // --- TAB 3: PROPERTY-TO-BUYER MATCHER ---
+    function populateMatcherAreas() {
+      const sel = document.getElementById('m-area');
+      const cur = sel.value;
+      const areas = [...new Set(allLeads.map(l => l.area).filter(a => a && a !== '—'))].sort();
+      sel.innerHTML = '<option value="ALL">Όλες οι περιοχές</option>' + areas.map(a => `<option value="${a}">${a}</option>`).join('');
+      if (cur && (cur === 'ALL' || areas.includes(cur))) sel.value = cur;
+    }
+
+    function getMatchedLeads() {
+      const area = document.getElementById('m-area').value;
+      const price = Number(document.getElementById('m-price').value) || 0;
+      const tol = Number(document.getElementById('m-tol').value) || 0.15;
+      const includeCold = document.getElementById('m-include-cold').checked;
+      const minB = price * (1 - tol), maxB = price * (1 + tol);
+
+      return allLeads.filter(l => {
+        if (area !== 'ALL' && l.area !== area) return false;
+        if (!includeCold && (l.segment === 'Σε ψύξη' || l.segment === 'Σε νάρκη')) return false;
+        return l.budget >= minB && l.budget <= maxB;
+      }).sort((a, b) => (SEGMENTS_META[a.segment].order - SEGMENTS_META[b.segment].order) || (Math.abs(a.budget - price) - Math.abs(b.budget - price)));
+    }
+
+    function renderMatcher() {
+      const price = Number(document.getElementById('m-price').value) || 0;
+      const area = document.getElementById('m-area').value;
+      const matches = getMatchedLeads();
+      const readyCnt = matches.filter(l => l.segment === 'Έτοιμος αγοραστής').length;
+
+      document.getElementById('matcher-summary').innerHTML =
+        `Βρέθηκαν <strong>${matches.length} ταιριαστοί αγοραστές</strong> (${readyCnt} 🔥 Έτοιμοι) για ακίνητο <strong>${formatEur(price)}</strong>${area !== 'ALL' ? ` σε <strong>${area}</strong>` : ''}.`;
+
+      const tbody = document.getElementById('matcher-tbody');
+      if (!matches.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#64748b; padding:24px;">Δεν βρέθηκαν πελάτες — δοκίμασε μεγαλύτερη ανοχή budget (±25%) ή «Όλες οι περιοχές».</td></tr>';
+        return;
       }
+      tbody.innerHTML = matches.map(l => {
+        const meta = SEGMENTS_META[l.segment];
+        const diffPct = price ? ((l.budget - price) / price * 100) : 0;
+        const diffStr = diffPct >= 0 ? `+${diffPct.toFixed(0)}%` : `${diffPct.toFixed(0)}%`;
+        const propSubj = `Νέο ακίνητο σε ${l.area} (${formatEur(price)}) — ταιριάζει στο budget σας`;
+        const propBody = `Καλησπέρα ${l.full_name.split(' ')[0]},\n\nΜόλις αναλάβαμε ένα νέο ακίνητο στην περιοχή ${l.area} στην τιμή των ${formatEur(price)}, πολύ κοντά στο budget σας (${formatEur(l.budget)}).\n\nΘα θέλατε να σας στείλω φωτογραφίες και να κλείσουμε μια πρώτη επίσκεψη;`;
+        return `
+          <tr>
+            <td><span class="badge ${meta.theme}" style="color:${meta.color};">${meta.icon} ${l.segment}</span></td>
+            <td><strong>${l.full_name}</strong><br><span style="font-size:11.5px; color:#64748b;">${l.email}</span></td>
+            <td>${l.area}</td>
+            <td><strong>${formatEur(l.budget)}</strong></td>
+            <td><span class="badge badge-match">${diffStr}</span></td>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-sm" href="${buildMailto(l, propSubj, propBody)}">✉️ Email</a>
+                <a class="btn btn-sm" href="${buildWhatsApp(l, propBody)}" target="_blank" rel="noopener">💬 WhatsApp</a>
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    ['m-area', 'm-price', 'm-tol', 'm-include-cold'].forEach(id =>
+      document.getElementById(id).addEventListener(id === 'm-price' ? 'input' : 'change', renderMatcher)
+    );
+    document.getElementById('btn-match-copy').addEventListener('click', () => {
+      const m = getMatchedLeads(); if (!m.length) return;
+      navigator.clipboard?.writeText(m.map(l => l.email).filter(Boolean).join(', '));
+      showToast(`Αντιγράφηκαν ${m.length} emails ταιριαστών αγοραστών!`);
+    });
+    document.getElementById('btn-match-export').addEventListener('click', () => {
+      const m = getMatchedLeads(); if (!m.length) return;
+      exportLeadsCsv(m, `property_match_${document.getElementById('m-area').value}_${document.getElementById('m-price').value}.csv`);
+    });
+
+    // --- LEAD DETAIL MODAL (Notes, Log Inbound, Log Visit, Delete) ---
+    function openLeadModal(leadId) {
+      const lead = allLeads.find(l => l.lead_id === leadId);
+      if (!lead) return;
+      const meta = SEGMENTS_META[lead.segment];
+      document.getElementById('ml-title').textContent = `${lead.full_name} (${lead.lead_id})`;
+      document.getElementById('ml-body').innerHTML = `
+        <div class="segment-banner ${meta.theme}" style="margin-bottom:14px;">
+          <div class="segment-icon">${meta.icon}</div>
+          <div>
+            <div class="segment-title">${lead.segment}</div>
+            <div class="segment-sub">📍 ${lead.area} · 💰 ${formatEur(lead.budget)} · 📩 ${lead.signals_count} σήματα · ⏱️ ${lead.days_since_inbound} μέρες αδράνειας</div>
+          </div>
+        </div>
+
+        <div class="action-card" style="margin-bottom:14px;">
+          <h4>⚡ Γρήγορη Καταγραφή Κίνησης Πελάτη (ενημερώνει αυτόματα το Segment!)</h4>
+          <div class="btn-group" style="margin-top:8px;">
+            <button type="button" class="btn btn-primary btn-sm" id="ml-log-signal">📩 +1 Εισερχόμενο Σήμα (Μηδενίζει μέρες)</button>
+            <button type="button" class="btn btn-green btn-sm" id="ml-log-visit">🏠 Καταγραφή Επίσκεψης (Αναβάθμιση σε Έτοιμο!)</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label"><span>📝 Σημειώσεις Συμβούλου</span><span style="font-size:11.5px; color:var(--muted);">Αποθηκεύεται τοπικά</span></label>
+          <textarea id="ml-notes" placeholder="Γράψε προτιμήσεις ακινήτου, ώρες επικοινωνίας, σχόλια από υπόδειξη...">${lead.notes || ''}</textarea>
+        </div>
+
+        <div class="toolbar" style="margin-bottom:0;">
+          <button type="button" class="btn btn-danger btn-sm" id="ml-delete">🗑️ Διαγραφή</button>
+          <div class="btn-group">
+            <a class="btn btn-sm" href="${buildMailto(lead)}">✉️ Email</a>
+            <a class="btn btn-sm" href="${buildWhatsApp(lead)}" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <button type="button" class="btn btn-primary btn-sm" id="ml-save-notes">💾 Αποθήκευση Σημείωσης</button>
+          </div>
+        </div>`;
+
+      document.getElementById('ml-log-signal').addEventListener('click', () => {
+        const updated = enrichLead({ ...lead, days_since_inbound: 0, signals_count: lead.signals_count + 1 });
+        replaceLead(updated); openLeadModal(updated.lead_id);
+        showToast(`Καταγράφηκε νέο σήμα! Νέο segment: ${updated.segment}`);
+      });
+      document.getElementById('ml-log-visit').addEventListener('click', () => {
+        const updated = enrichLead({ ...lead, days_since_inbound: 0, signals_count: lead.signals_count + 1, has_visit: 1 });
+        replaceLead(updated); openLeadModal(updated.lead_id);
+        showToast(`Καταγράφηκε επίσκεψη! Αναβαθμίστηκε σε 🔥 ${updated.segment}`);
+      });
+      document.getElementById('ml-save-notes').addEventListener('click', () => {
+        lead.notes = document.getElementById('ml-notes').value;
+        saveLeads(); renderAll(); document.getElementById('modal-lead').classList.remove('open');
+        showToast('Οι σημειώσεις αποθηκεύτηκαν.');
+      });
+      document.getElementById('ml-delete').addEventListener('click', () => {
+        if (!confirm(`Να διαγραφεί ο πελάτης ${lead.full_name};`)) return;
+        allLeads = allLeads.filter(l => l.lead_id !== lead.lead_id);
+        saveLeads(); renderAll(); document.getElementById('modal-lead').classList.remove('open');
+        showToast('Ο πελάτης διαγράφηκε.');
+      });
+      document.getElementById('modal-lead').classList.add('open');
+    }
+
+    function replaceLead(updated) {
+      const idx = allLeads.findIndex(l => l.lead_id === updated.lead_id);
+      if (idx >= 0) allLeads[idx] = updated;
+      saveLeads(); renderAll();
+    }
+
+    // --- NEW LEAD MODAL ---
+    document.getElementById('btn-open-new-lead').addEventListener('click', () => document.getElementById('modal-new').classList.add('open'));
+    document.getElementById('form-new-lead').addEventListener('submit', e => {
+      e.preventDefault();
+      const newLead = enrichLead({
+        lead_id: `LD-${String(allLeads.length + 1).padStart(4, '0')}`,
+        full_name: document.getElementById('nl-name').value.trim(),
+        email: document.getElementById('nl-email').value.trim(),
+        area: document.getElementById('nl-area').value.trim() || '—',
+        source: document.getElementById('nl-source').value,
+        budget: Number(document.getElementById('nl-budget').value) || 0,
+        signals_count: Number(document.getElementById('nl-signals').value) || 1,
+        days_since_inbound: Number(document.getElementById('nl-days').value) || 0,
+        has_visit: document.getElementById('nl-visit').value,
+        notes: document.getElementById('nl-notes').value.trim()
+      });
+      allLeads.unshift(newLead);
+      saveLeads(); renderAll();
+      e.target.reset();
+      document.getElementById('modal-new').classList.remove('open');
+      showToast(`Προστέθηκε: ${newLead.full_name} → ${newLead.segment}`);
+    });
+
+    // --- SMART CSV PARSER & COLUMN MAPPER ---
+    function parseCSV(text) {
+      const clean = text.replace(/^\uFEFF/, '').trim();
+      const lines = clean.split(/\r?\n/).filter(Boolean);
+      if (lines.length < 2) return { headers: [], rows: [] };
+      const delim = (lines[0].split(';').length > lines[0].split(',').length) ? ';' : ',';
+      const headers = lines[0].split(delim).map(h => h.replace(/^"|"$/g, '').trim());
+      const rows = lines.slice(1).map(line => {
+        const cols = line.split(delim).map(c => c.replace(/^"|"$/g, '').trim());
+        const obj = {};
+        headers.forEach((h, i) => { obj[h] = cols[i] ?? ''; });
+        return obj;
+      });
+      return { headers, rows };
+    }
+
+    function parseDateToDaysAgo(str) {
+      if (!str) return 0;
+      let d = null;
+      const m = str.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+      if (m) d = new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+      else d = new Date(str);
+      if (!d || isNaN(d.getTime())) return 0;
+      return Math.max(0, Math.round((Date.now() - d.getTime()) / 86400000));
+    }
+
+    document.getElementById('csv-file-input').addEventListener('change', e => {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const parsed = parseCSV(ev.target.result);
+        if (!parsed.rows.length) { showToast('Το CSV φαίνεται άδειο.'); return; }
+        pendingCsv = parsed;
+        openMapperModal(parsed.headers);
+      };
+      reader.readAsText(file, 'UTF-8');
+      e.target.value = '';
+    });
+
+    const MAPPER_SPEC = [
+      { key: 'full_name',          label: 'Ονοματεπώνυμο',      guess: ['full_name', 'name', 'όνομα', 'ονομα', 'πελάτης', 'client'] },
+      { key: 'email',              label: 'Email',              guess: ['email', 'mail', 'e-mail'] },
+      { key: 'area',               label: 'Περιοχή',            guess: ['area', 'περιοχή', 'περιοχη', 'location', 'city'] },
+      { key: 'source',             label: 'Πηγή (Spitogatos κλπ)', guess: ['source', 'πηγή', 'πηγη', 'channel'] },
+      { key: 'budget',             label: 'Budget (€)',         guess: ['budget', 'προϋπολογισμός', 'τιμή', 'price'] },
+      { key: 'signals_count',      label: 'Πλήθος Σημάτων',     guess: ['signals_count', 'signals', 'σήματα', 'αιτήματα', 'inquiries'] },
+      { key: 'has_visit',          label: 'Επίσκεψη (0/1, Ναι)', guess: ['has_visit', 'visit', 'επίσκεψη', 'υπόδειξη'] },
+      { key: 'days_since_inbound', label: 'Μέρες Αδράνειας (ή κενό)', guess: ['days_since_inbound', 'days', 'μέρες', 'ημέρες'] },
+      { key: 'last_inbound_date',  label: 'Ή Ημ/νία Τελευταίας Επαφής', guess: ['last_inbound_date', 'last_contact', 'ημερομηνία', 'date'] }
+    ];
+
+    function openMapperModal(headers) {
+      const opts = '<option value="">— Δεν υπάρχει —</option>' + headers.map(h => `<option value="${h}">${h}</option>`).join('');
+      document.getElementById('mapper-fields').innerHTML = MAPPER_SPEC.map(f => {
+        const auto = headers.find(h => f.guess.some(g => h.toLowerCase().includes(g))) || '';
+        return `
+          <div class="form-group">
+            <label class="form-label">${f.label}</label>
+            <select class="select-box" id="map-${f.key}" style="width:100%;">${opts}</select>
+          </div>`;
+      }).join('');
+      MAPPER_SPEC.forEach(f => {
+        const auto = headers.find(h => f.guess.some(g => h.toLowerCase().includes(g))) || '';
+        document.getElementById('map-' + f.key).value = auto;
+      });
+      document.getElementById('modal-mapper').classList.add('open');
+    }
+
+    document.getElementById('btn-apply-mapper').addEventListener('click', () => {
+      if (!pendingCsv) return;
+      const m = {};
+      MAPPER_SPEC.forEach(f => { m[f.key] = document.getElementById('map-' + f.key).value; });
+
+      allLeads = pendingCsv.rows.map((r, i) => {
+        const days = m.days_since_inbound && r[m.days_since_inbound] !== ''
+          ? Number(r[m.days_since_inbound])
+          : (m.last_inbound_date ? parseDateToDaysAgo(r[m.last_inbound_date]) : 0);
+        return enrichLead({
+          lead_id: r.lead_id || `CRM-${String(i + 1).padStart(4, '0')}`,
+          full_name: m.full_name ? r[m.full_name] : `Πελάτης ${i + 1}`,
+          email: m.email ? r[m.email] : '',
+          area: m.area ? r[m.area] : '—',
+          source: m.source ? r[m.source] : 'CRM Import',
+          budget: m.budget ? r[m.budget] : 0,
+          signals_count: m.signals_count ? r[m.signals_count] : 1,
+          has_visit: m.has_visit ? r[m.has_visit] : 0,
+          days_since_inbound: days
+        }, i);
+      });
+      saveLeads(); renderAll();
+      document.getElementById('modal-mapper').classList.remove('open');
+      showToast(`Εισήχθησαν ${allLeads.length} πελάτες από το CSV σου!`);
+    });
+
+    // --- EXPORTS & COPY ---
+    function exportLeadsCsv(list, filename) {
+      const header = 'lead_id,full_name,email,area,source,budget,signals_count,has_visit,days_since_inbound,segment,at_risk_60d,notes\n';
+      const body = list.map(l =>
+        [l.lead_id, l.full_name, l.email, l.area, l.source, l.budget, l.signals_count, l.has_visit ? 1 : 0, l.days_since_inbound, l.segment, l.at_risk ? 'ΝΑΙ' : 'ΟΧΙ', l.notes || '']
+          .map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')
+      ).join('\n');
+      const blob = new Blob(['\uFEFF' + header + body], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    document.getElementById('btn-copy-emails').addEventListener('click', () => {
+      const f = getFilteredLeads(); if (!f.length) return;
+      navigator.clipboard?.writeText(f.map(l => l.email).filter(Boolean).join(', '));
+      showToast(`Αντιγράφηκαν ${f.length} emails!`);
+    });
+    document.getElementById('btn-export-csv').addEventListener('click', () => {
+      const f = getFilteredLeads(); if (!f.length) return;
+      const seg = document.getElementById('filter-segment').value;
+      exportLeadsCsv(f, seg === 'ALL' ? 'crm_all_segments.csv' : `campaign_${seg.replace(/\s+/g, '_')}.csv`);
+    });
+    document.getElementById('btn-download-template').addEventListener('click', () => {
+      const tpl = '\uFEFFlead_id,full_name,email,area,source,budget,signals_count,has_visit,days_since_inbound\n' +
+        'LD-0001,Μαρία Παπαδοπούλου,maria@example.gr,Γλυφάδα,Spitogatos,260000,3,0,18\n' +
+        'LD-0002,Νίκος Γεωργίου,nikos@example.gr,Χαλάνδρι,Website,160000,2,0,25\n';
+      const blob = new Blob([tpl], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'crm_leads_template.csv'; a.click();
+    });
+
+    // --- PRINT EXECUTIVE PDF REPORT ---
+    document.getElementById('btn-print-pdf').addEventListener('click', () => {
+      const todayStr = new Date().toLocaleDateString('el-GR');
+      const total = allLeads.length;
+      const ready = allLeads.filter(l => l.segment === 'Έτοιμος αγοραστής');
+      const alerts = allLeads.filter(l => l.at_risk);
+      const rowsHtml = SEGMENT_ORDER.map(seg => {
+        const list = allLeads.filter(l => l.segment === seg);
+        const sumB = list.reduce((s, l) => s + l.budget, 0);
+        return `<tr><td>${SEGMENTS_META[seg].icon} ${seg}</td><td>${list.length}</td><td>${total ? (list.length / total * 100).toFixed(1) : 0}%</td><td>${formatEur(sumB)}</td></tr>`;
+      }).join('');
+      const alertRows = alerts.slice(0, 12).map(l =>
+        `<tr><td>${l.full_name}</td><td>${l.area}</td><td>${formatEur(l.budget)}</td><td>${l.days_since_inbound} μέρες</td></tr>`
+      ).join('');
+
+      document.getElementById('print-report').innerHTML = `
+        <h1>Εβδομαδιαία Αναφορά Real Estate CRM — RFM Segmentation</h1>
+        <p style="color:#555; margin:0 0 16px;">Ημερομηνία αναφοράς: ${todayStr} · Σύνολο ενεργής βάσης: <strong>${total} πελάτες</strong> · Pipeline Έτοιμων: <strong>${formatEur(ready.reduce((s, l) => s + l.budget, 0))}</strong></p>
+        <h3>1. Κατανομή Βάσης &amp; Pipeline Budget ανά Segment</h3>
+        <table style="margin-bottom:18px;"><thead><tr><th>Segment</th><th>Πλήθος</th><th>Ποσοστό</th><th>Συνολικό Budget</th></tr></thead><tbody>${rowsHtml}</tbody></table>
+        <h3>2. Επείγοντα Alerts (Έτοιμοι 45–60 ημερών πριν πέσουν «Σε σκέψη»)</h3>
+        <table><thead><tr><th>Πελάτης</th><th>Περιοχή</th><th>Budget</th><th>Αδράνεια</th></tr></thead><tbody>${alertRows || '<tr><td colspan="4">Κανένα alert!</td></tr>'}</tbody></table>`;
+      window.print();
+    });
+
+    // --- TAB 4: EMAIL TEMPLATES ---
+    const EMAIL_TEMPLATES = [
+      { title: '🔥 Έτοιμος αγοραστής — Πρόταση Υπόδειξης', theme: 'theme-ready', subject: '3 νέα ακίνητα σε {{AREA}} στο budget σας ({{BUDGET}})', body: 'Καλησπέρα {{NAME}},\n\nΕίδαμε το ενδιαφέρον σας για την περιοχή {{AREA}} και ξεχωρίσαμε 3 ακίνητα έως {{BUDGET}} — το ένα δεν έχει δημοσιευτεί ακόμα στα portals.\n\nΘα σας βόλευε μια σύντομη επίσκεψη αυτή την εβδομάδα;\n\nΜε εκτίμηση' },
+      { title: '⚠️ Alert 45–60 ημερών — Πριν πέσει «Σε σκέψη»', theme: 'theme-ready', subject: '{{NAME}}, προλάβαμε μια νέα ευκαιρία σε {{AREA}}', body: 'Καλησπέρα {{NAME}},\n\nΉθελα απλώς να ελέγξω αν συνεχίζετε την αναζήτηση σε {{AREA}}. Μόλις μπήκε ένα ακίνητο κοντά στα {{BUDGET}} με πολύ καλή σχέση τιμής/τ.μ. Να σας στείλω φωτογραφίες και κάτοψη;' },
+      { title: '🌱 Νέος ενδιαφερόμενος — Welcome & Qualification', theme: 'theme-new', subject: 'Καλώς ήρθατε! Πώς θα βρούμε το ιδανικό ακίνητο σε {{AREA}}', body: 'Καλησπέρα {{NAME}},\n\nΕυχαριστούμε για το μήνυμά σας! Απαντήστε μας σε 2 γρήγορες ερωτήσεις για να σας στέλνουμε μόνο ό,τι αξίζει:\n1. Ποιο είναι το ιδανικό σας χρονοδιάγραμμα;\n2. Υπάρχει κάποιο απαραίτητο χαρακτηριστικό (πάρκινγκ, όροφος, ανακαινισμένο);' },
+      { title: '⌛ Σε σκέψη (61–180μ) — Nurturing & Price Drops', theme: 'theme-think', subject: 'Πρόσφατες μειώσεις τιμών σε {{AREA}}', body: 'Καλησπέρα {{NAME}},\n\nΞέρουμε ότι η αγορά ακινήτου θέλει τον χρόνο της. Συγκεντρώσαμε 2 πρόσφατες μειώσεις τιμών σε {{AREA}} κοντά στα {{BUDGET}}. Αν θέλετε να δείτε κάποιο από κοντά, είμαστε στη διάθεσή σας.' },
+      { title: '❄️ Σε ψύξη (181–365μ) — Re-engagement 1 κλικ', theme: 'theme-cold', subject: 'Ψάχνετε ακόμα ακίνητο σε {{AREA}}, {{NAME}};', body: 'Καλησπέρα {{NAME}},\n\nΑπαντήστε μας απλώς με έναν αριθμό:\n1️⃣ Συνεχίζω την αναζήτηση σε {{AREA}}\n2️⃣ Άλλαξα περιοχή ή budget\n3️⃣ Βρήκα ακίνητο / δεν ενδιαφέρομαι πλέον' }
     ];
 
     function renderTemplates() {
@@ -1151,98 +1251,122 @@ LEFT JOIN inbound_activity a ON l.lead_id = a.lead_id;</pre>
       const area = document.getElementById('tpl-area').value || '{{Περιοχή}}';
       const budget = document.getElementById('tpl-budget').value || '{{Budget}}';
       const fill = s => s.replaceAll('{{NAME}}', name).replaceAll('{{AREA}}', area).replaceAll('{{BUDGET}}', budget);
-
       document.getElementById('templates-container').innerHTML = EMAIL_TEMPLATES.map((t, i) => `
         <div class="email-card">
-          <div class="toolbar" style="margin-bottom:8px;">
-            <span class="badge ${t.theme}" style="font-size:13px; padding:5px 12px;">${t.title}</span>
-            <button type="button" class="btn" data-copy-email="${i}">📋 Αντιγραφή Email</button>
+          <div class="toolbar" style="margin-bottom:6px;">
+            <span class="badge ${t.theme}" style="font-size:13px; padding:5px 11px;">${t.title}</span>
+            <button type="button" class="btn btn-sm" data-copy-email="${i}">📋 Αντιγραφή</button>
           </div>
-          <div style="font-size:13.5px; margin-bottom:6px;"><strong>Θέμα:</strong> ${fill(t.subject)}</div>
-          <div class="email-pre" id="email-body-${i}">${fill(t.body)}</div>
+          <div style="font-size:13.5px;"><strong>Θέμα:</strong> ${fill(t.subject)}</div>
+          <div class="email-pre">${fill(t.body)}</div>
         </div>`).join('');
-
-      document.querySelectorAll('[data-copy-email]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const idx = Number(btn.dataset.copyEmail);
-          const t = EMAIL_TEMPLATES[idx];
-          const text = `Θέμα: ${fill(t.subject)}\n\n${fill(t.body)}`;
-          navigator.clipboard?.writeText(text);
-          btn.textContent = '✅ Αντιγράφηκε!';
-          setTimeout(() => { btn.textContent = '📋 Αντιγραφή Email'; }, 1500);
-        });
-      });
+      document.querySelectorAll('[data-copy-email]').forEach(btn => btn.addEventListener('click', () => {
+        const t = EMAIL_TEMPLATES[Number(btn.dataset.copyEmail)];
+        navigator.clipboard?.writeText(`Θέμα: ${fill(t.subject)}\n\n${fill(t.body)}`);
+        showToast('Το email αντιγράφηκε στο πρόχειρο!');
+      }));
     }
-
     ['tpl-name', 'tpl-area', 'tpl-budget'].forEach(id => document.getElementById(id).addEventListener('input', renderTemplates));
     document.getElementById('btn-tpl-vars').addEventListener('click', () => {
-      document.getElementById('tpl-name').value = '{{Όνομα}}';
-      document.getElementById('tpl-area').value = '{{Περιοχή}}';
-      document.getElementById('tpl-budget').value = '{{Budget}}';
-      renderTemplates();
+      document.getElementById('tpl-name').value = '{{Όνομα}}'; document.getElementById('tpl-area').value = '{{Περιοχή}}'; document.getElementById('tpl-budget').value = '{{Budget}}'; renderTemplates();
     });
     renderTemplates();
 
-    // =========================================================================
-    // Tab 6: Code Copy & Mini Quiz
-    // =========================================================================
-    document.querySelectorAll('[data-copy]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const text = document.getElementById(btn.dataset.copy).textContent;
-        navigator.clipboard?.writeText(text);
-        const orig = btn.textContent;
-        btn.textContent = '✅ Αντιγράφηκε!';
-        setTimeout(() => { btn.textContent = orig; }, 1500);
-      });
-    });
+    // --- TAB 5: WHAT-IF LAB ---
+    const wiActive = document.getElementById('wi-active'), wiBudget = document.getElementById('wi-budget'), wiSignals = document.getElementById('wi-signals'), wiThink = document.getElementById('wi-think');
+    function renderWhatIf() {
+      const cfg = { activeDays: Number(wiActive.value), vipBudget: Number(wiBudget.value), minSignals: Number(wiSignals.value), thinkMaxDays: Number(wiThink.value) };
+      document.getElementById('wi-val-active').textContent = `${cfg.activeDays} μέρες`;
+      document.getElementById('wi-val-budget').textContent = formatEur(cfg.vipBudget);
+      document.getElementById('wi-val-signals').textContent = `${cfg.minSignals}+ σήματα`;
+      document.getElementById('wi-val-think').textContent = `${cfg.thinkMaxDays} μέρες`;
+      document.getElementById('whatif-n').textContent = allLeads.length;
 
-    const QUIZ = [
-      {
-        q: '1. Ένας πελάτης έκανε τελευταία εισερχόμενη κίνηση πριν 20 μέρες, έστειλε 2 αιτήματα, ΔΕΝ έκανε επίσκεψη, και έχει budget 220.000€. Σε ποιο segment πέφτει;',
-        opts: ['Νέος ενδιαφερόμενος', 'Έτοιμος αγοραστής', 'Σε σκέψη'],
-        ans: 1,
-        exp: 'Σωστά! Έχει ≤60 μέρες, 2–3 σήματα ΚΑΙ budget ≥ 200.000€, άρα ενεργοποιείται ο κανόνας του «Έτοιμου αγοραστή».'
-      },
-      {
-        q: '2. Γιατί στην SQL γράφουμε WHERE direction = \'inbound\';',
-        opts: ['Για να τρέχει πιο γρήγορα το query', 'Για να μη φαίνονται «ζωντανοί» ανενεργοί πελάτες επειδή τους στείλαμε εμείς newsletter', 'Για να μετράμε μόνο τις επισκέψεις'],
-        ans: 1,
-        exp: 'Ακριβώς! Αν μετρούσαμε τα δικά μας outbound emails/κλήσεις, το Recency θα μηδένιζε συνεχώς χωρίς πραγματικό ενδιαφέρον του πελάτη.'
-      },
-      {
-        q: '3. Ένας πελάτης «Σε νάρκη» (400 μέρες αδράνειας) στέλνει σήμερα ένα αίτημα για ένα ακίνητο 150.000€. Τι γίνεται;',
-        opts: ['Μένει μόνιμα «Σε νάρκη»', 'Ανεβαίνει σε «Νέος ενδιαφερόμενος»', 'Ανεβαίνει σε «Έτοιμος αγοραστής»'],
-        ans: 1,
-        exp: 'Σωστά! Με νέα εισερχόμενη κίνηση (0 μέρες αδράνειας, 1 σήμα, 150k) «ξυπνάει» και γίνεται «Νέος ενδιαφερόμενος».'
+      const base = {}, next = {}, bud = {};
+      SEGMENT_ORDER.forEach(s => { base[s] = 0; next[s] = 0; bud[s] = 0; });
+      allLeads.forEach(l => {
+        base[l.segment]++;
+        const ns = classifyLead(l.days_since_inbound, l.signals_count, l.has_visit, l.budget, cfg).segment;
+        next[ns]++; bud[ns] += l.budget;
+      });
+      document.getElementById('whatif-tbody').innerHTML = SEGMENT_ORDER.map(s => {
+        const d = next[s] - base[s];
+        return `<tr><td><strong>${SEGMENTS_META[s].icon} ${s}</strong></td><td>${base[s]}</td><td><strong>${next[s]}</strong></td><td class="${d > 0 ? 'delta-pos' : d < 0 ? 'delta-neg' : 'delta-zero'}">${d > 0 ? '+' + d : d}</td><td>${formatEur(bud[s])}</td></tr>`;
+      }).join('');
+      const rd = next['Έτοιμος αγοραστής'] - base['Έτοιμος αγοραστής'];
+      document.getElementById('whatif-insight').innerHTML = `<h4>💡 Insight</h4><p style="margin:0; color:#475569;">Με τα νέα όρια, οι «Έτοιμοι αγοραστές» μεταβάλλονται κατά <strong>${rd >= 0 ? '+' + rd : rd}</strong> (νέο pipeline: <strong>${formatEur(bud['Έτοιμος αγοραστής'])}</strong>).</p>`;
+    }
+    [wiActive, wiBudget, wiSignals, wiThink].forEach(el => el.addEventListener('input', renderWhatIf));
+    document.getElementById('btn-wi-reset').addEventListener('click', () => { wiActive.value = 60; wiBudget.value = 200000; wiSignals.value = 4; wiThink.value = 180; renderWhatIf(); });
+
+    // --- TAB 6: SIMULATOR ---
+    const simDays = document.getElementById('sim-days'), simSignals = document.getElementById('sim-signals'), simBudget = document.getElementById('sim-budget');
+    let simHasVisit = false;
+    function updateSimulator() {
+      const d = Number(simDays.value), s = Number(simSignals.value), b = Number(simBudget.value);
+      document.getElementById('val-days').textContent = `${d} μέρες`;
+      document.getElementById('val-signals').textContent = `${s} σήματα`;
+      document.getElementById('val-budget').textContent = formatEur(b);
+      const res = classifyLead(d, s, simHasVisit, b), meta = SEGMENTS_META[res.segment];
+      document.getElementById('sim-result').className = `result-box ${meta.theme}`;
+      document.getElementById('sim-result').innerHTML = `<strong>${meta.icon} ${res.segment}</strong>${res.atRisk ? ' <span class="badge badge-alert">⚠️ Alert 45–60μ</span>' : ''}<div style="font-size:13px; color:#334155; margin-top:4px;">${res.daysToDrop !== null ? `Απομένουν ${res.daysToDrop} μέρες πριν υποβαθμιστεί.` : 'Μένει μόνιμα σε νάρκη μέχρι νέα κίνηση.'}</div>`;
+    }
+    [simDays, simSignals, simBudget].forEach(el => el.addEventListener('input', updateSimulator));
+    document.getElementById('btn-visit-no').addEventListener('click', () => { simHasVisit = false; document.getElementById('btn-visit-no').classList.add('active'); document.getElementById('btn-visit-yes').classList.remove('active'); updateSimulator(); });
+    document.getElementById('btn-visit-yes').addEventListener('click', () => { simHasVisit = true; document.getElementById('btn-visit-yes').classList.add('active'); document.getElementById('btn-visit-no').classList.remove('active'); updateSimulator(); });
+    updateSimulator();
+
+    // =========================================================================
+    // Startup Data Loading (localStorage -> CSV -> Fallback)
+    // =========================================================================
+    function generateFallbackLeads() {
+      const names = ['Γιώργος Παπαδόπουλος','Μαρία Γεωργίου','Νίκος Νικολάου','Ελένη Δημητρίου','Κώστας Οικονόμου','Κατερίνα Βασιλείου','Δημήτρης Αντωνίου','Σοφία Πετρίδη','Παναγιώτης Μακρής','Άννα Σταματίου'];
+      const areas = ['Γλυφάδα','Κηφισιά','Χαλάνδρι','Παλαιό Φάληρο','Νέα Σμύρνη','Μαρούσι','Παγκράτι','Άλιμος'];
+      const sources = ['Spitogatos','Xe.gr','Website','Instagram Ads','Σύσταση','Τηλέφωνο'];
+      const out = [];
+      for (let i = 1; i <= 150; i++) {
+        const b = i % 5;
+        let days = 20, signals = 2, visit = 0, budget = 220000;
+        if (b === 0) { days = (i * 7) % 58 + 1; signals = 3 + (i % 4); visit = i % 2; budget = 200000 + (i % 5) * 45000; }
+        else if (b === 1) { days = (i * 5) % 55 + 1; signals = 1 + (i % 2); visit = 0; budget = 110000 + (i % 4) * 20000; }
+        else if (b === 2) { days = 65 + (i * 11) % 110; signals = 1 + (i % 4); visit = 0; budget = 150000 + (i % 5) * 35000; }
+        else if (b === 3) { days = 185 + (i * 13) % 170; signals = 1 + (i % 3); visit = 0; budget = 140000 + (i % 4) * 30000; }
+        else { days = 370 + (i * 17) % 220; signals = 1 + (i % 2); visit = 0; budget = 120000 + (i % 4) * 30000; }
+        out.push(enrichLead({ lead_id: `LD-${String(i).padStart(4, '0')}`, full_name: names[i % names.length], email: `client${String(i).padStart(3, '0')}@example-realestate.gr`, area: areas[i % areas.length], source: sources[i % sources.length], budget, signals_count: signals, has_visit: visit, days_since_inbound: days }, i));
       }
-    ];
+      return out;
+    }
 
-    document.getElementById('quiz-container').innerHTML = QUIZ.map((item, qi) => `
-      <div class="quiz-q">
-        <div style="font-weight:600; font-size:14px;">${item.q}</div>
-        <div class="quiz-opts">
-          ${item.opts.map((o, oi) => `<button type="button" class="quiz-opt" data-qi="${qi}" data-oi="${oi}">${o}</button>`).join('')}
-        </div>
-        <div class="quiz-feedback" id="qf-${qi}"></div>
-      </div>`).join('');
+    async function loadFreshSample() {
+      try {
+        const resp = await fetch('./data/sample_crm_leads.csv');
+        if (!resp.ok) throw new Error('HTTP');
+        const parsed = parseCSV(await resp.text());
+        allLeads = parsed.rows.map((r, i) => enrichLead(r, i));
+      } catch {
+        allLeads = generateFallbackLeads();
+      }
+      saveLeads(); renderAll();
+    }
 
-    document.querySelectorAll('.quiz-opt').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const qi = Number(btn.dataset.qi), oi = Number(btn.dataset.oi);
-        const item = QUIZ[qi];
-        const fb = document.getElementById(`qf-${qi}`);
-        if (oi === item.ans) {
-          fb.style.color = '#16803d';
-          fb.textContent = '✅ ' + item.exp;
-        } else {
-          fb.style.color = '#b8431b';
-          fb.textContent = '❌ Δοκίμασε ξανά — έλεγξε τους κανόνες στο Tab 1!';
-        }
-      });
+    document.getElementById('btn-load-sample').addEventListener('click', () => {
+      if (!confirm('Να επαναφερθεί το δείγμα των 150 πελατών; (Θα αντικαταστήσει τις τοπικές αλλαγές)')) return;
+      loadFreshSample(); showToast('Επαναφέρθηκε το δείγμα των 150 πελατών.');
     });
 
-    // Auto-load sample dataset on startup so Analyzer & What-If Lab work immediately
-    loadSampleData();
+    (function init() {
+      const saved = localStorage.getItem(STORAGE_LEADS);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length) {
+            allLeads = parsed.map((r, i) => enrichLead(r, i));
+            renderAll(); return;
+          }
+        } catch {}
+      }
+      loadFreshSample();
+    })();
   </script>
 </body>
 </html>
